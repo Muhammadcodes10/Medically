@@ -32,7 +32,7 @@ const operation = mongoose.model('Operation', OperationSchema);
 
 
 // User backend system
-function findTreatment(location: number[], treatment: string): Promise<number> {
+function findTreatment(location: number[], treatment: string): Promise<string | null | undefined> {
   const userLat = location[0];
   const userLon = location[1];
 
@@ -41,7 +41,7 @@ function findTreatment(location: number[], treatment: string): Promise<number> {
   return operation.find({ type: treatment })  // This is an asynchronous operation that queries the database for the desired result 
     .then((results) => { // Upon discovery, the answer from MongoDB will be an array of MongoDB documents that pass the criteria
       let best = Infinity;
-
+      let key = 0
       for (let i = 0; i < results.length; i++) {  // Loops through all the documents in the returned MongoDB array
         const d = distance(
           userLat,
@@ -50,10 +50,13 @@ function findTreatment(location: number[], treatment: string): Promise<number> {
           results[i].lon as number
         );
 
-        if (d < best) best = d;
+        if (d < best) {
+          best = d;
+          key = i
+        }
       }
 
-      return best; // resolves Promise<number>
+      return results[key].hospital; // resolves Promise<number>
     });
 }
 
@@ -89,7 +92,7 @@ app.post('/check', (req,res) => {
     const location = [data.lat, data.lon]
     findTreatment(location, data.type) // This function is structured in a manner that expects asynchronization.
     .then((nearest) => {
-      res.json({ nearestDistanceKm: nearest});
+      res.json({ nearestHospital: nearest});
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
