@@ -16,6 +16,8 @@ const OperationSchema = new mongoose.Schema({
 });
 // The model creates a copy of the Schema in a way that allows the instances to be made
 const operation = mongoose.model('Operation', OperationSchema);
+
+// The information below represents data from hospitals that will be provided to us via an API or manual database entry
 // An instance of the user model
 // const treatment = new operation({
 //     type: "Iron levels",
@@ -30,15 +32,17 @@ const operation = mongoose.model('Operation', OperationSchema);
 
 
 // User backend system
-function findTreatment(location: number[], val: string): Promise<number> {
+function findTreatment(location: number[], treatment: string): Promise<number> {
   const userLat = location[0];
   const userLon = location[1];
 
-  return operation.find({ type: val })
-    .then((results) => {
+
+  // The entire 'return operation.find...' is an asynchronous, so it returns a promise. In this particular case, a Number
+  return operation.find({ type: treatment })  // This is an asynchronous operation that queries the database for the desired result 
+    .then((results) => { // Upon discovery, the answer from MongoDB will be an array of MongoDB documents that pass the criteria
       let best = Infinity;
 
-      for (let i = 0; i < results.length; i++) {
+      for (let i = 0; i < results.length; i++) {  // Loops through all the documents in the returned MongoDB array
         const d = distance(
           userLat,
           userLon,
@@ -53,7 +57,7 @@ function findTreatment(location: number[], val: string): Promise<number> {
     });
 }
 
-// I will apply the haversine formula to figure out which hospital is closer to the user and return those hospitals in an ordered list.
+// The haversine formula to figure out which valid hospital is closer to the user.
 function distance(userLat: number, userLon: number, hospitalLat: number, hospitalLon: number): number{
     const R = 6371; // Earth radius in km
 
@@ -78,11 +82,12 @@ app.get('/home', (req, res) => {
     res.send("Everyone deserves access to Healthcare.");  
 });
 
+
+// The main route for users to actually check for treatment
 app.post('/check', (req,res) => {
     const data = req.body;
     const location = [data.lat, data.lon]
-    // distance(location)
-    findTreatment(location, data.type)
+    findTreatment(location, data.type) // This function is structured in a manner that expects asynchronization.
     .then((nearest) => {
       res.json({ nearestDistanceKm: nearest});
     })
@@ -90,6 +95,20 @@ app.post('/check', (req,res) => {
       res.status(500).json({ error: err.message });
     });
  })
+
+ app.post('/updateData', (req,res) => {
+    const data = req.body;
+    const treatment = new operation({
+    type: data.type,
+    hospital: data.hospital,
+    lat: data.lat,
+    lon: data.lon
+  });
+// Instance saved to db.
+  treatment.save()
+  .then(() => console.log("Treatment saved "))
+  .catch((err) => console.error("Error: ", err))
+  })
 
 app.listen(port, () => {
     console.log(`TypeScript with Express http://localhost:${port}/`);
