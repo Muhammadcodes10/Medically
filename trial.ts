@@ -56,7 +56,7 @@ function findTreatment(location: number[], treatment: string): Promise<string | 
         }
       }
 
-      return results[key].hospital; // resolves Promise<number>
+      return results[key].hospital; 
     });
 }
 
