@@ -88,6 +88,7 @@ app.get('/home', (req, res) => {
 
 // The main route for users to actually check for treatment
 app.post('/check', (req,res) => {
+  console.log("BODY:", req.body);
     const data = req.body;
     const location = [data.lat, data.lon]
     findTreatment(location, data.type) // This function is structured in a manner that expects asynchronization.

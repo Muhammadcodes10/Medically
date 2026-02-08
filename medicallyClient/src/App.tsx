@@ -1,39 +1,29 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
+function Treatments(){
 
-function Greeting(props: { name: string }) {
-  return <h2>Hello {props.name}</h2>
-}
+  let hospitals = ["Belam", "Medicaid", "Zankli", "Nisa Premier", "Nizamiye"]
 
-
-const city: string = "Istanbul"
-
-function Location(){
-  return <h2> The city is {city}</h2>
-}
-
-function App() {
-  const [count, setCount] = useState(0)
-
+if (hospitals.includes("Belam")){
   return (
-    <>
-      <h2>At Medically, we believe healthcare comes first. </h2>
-       <Greeting name = "Muhammad"/>
-       <Location/>
-
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Muhammad made ${count},000 today. 
-        </button>
-
-       
-      </div>
-  
-    </>
+    <h1> You might get your treatment at my Father's clinic</h1>
   )
 }
 
-export default App
+  return (
+  <>
+        <div id = "hobbies" className="hidden">
+            <h2> Are you a girl who lives in sokoto and is interested in Basketball? or Violin?  </h2>
+            <p> If yes, let's get in touch - Husna</p>
+          <button id ="yesButton" >Yes</button>
+        </div>
+        
+        {hospitals.map((hospital) => (<li>{hospital}</li>))}
+
+  </>
+  )
+}
+
+function App() {
+  return <> <Treatments/> 
+  </>;
+}
+export default App;
