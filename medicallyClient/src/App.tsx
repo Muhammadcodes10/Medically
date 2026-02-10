@@ -1,29 +1,31 @@
-function Treatments(){
+import { useState } from "react"
 
-  let hospitals = ["Belam", "Medicaid", "Zankli", "Nisa Premier", "Nizamiye"]
-
-if (hospitals.includes("Belam")){
-  return (
-    <h1> You might get your treatment at my Father's clinic</h1>
-  )
+interface props{
+  items: string[];
+  heading: string;
 }
+let hospitals = ["Belam", "Medicaid", "Zankli", "Nisa Premier", "Nizamiye"]
 
+function Treatments({items, heading}: props){
+
+  let [name, setName] = useState(1)
   return (
   <>
-        <div id = "hobbies" className="hidden">
-            <h2> Are you a girl who lives in sokoto and is interested in Basketball? or Violin?  </h2>
-            <p> If yes, let's get in touch - Husna</p>
-          <button id ="yesButton" >Yes</button>
-        </div>
         
-        {hospitals.map((hospital) => (<li>{hospital}</li>))}
+        
+        <h1> Notification: Muhammad, {name},000$ received today</h1>
+        <button onClick={() => setName(name+1)}> Pay</button>
+        <h1>{heading}</h1>
+        {items.length > 1 && items.map((item) => <li>{item}</li>)}
+        {/* {hospitals.map((hospital) => )} */}
+        
 
   </>
   )
 }
 
 function App() {
-  return <> <Treatments/> 
+  return <> <Treatments  items={hospitals} heading="Clinics"/> 
   </>;
 }
 export default App;
