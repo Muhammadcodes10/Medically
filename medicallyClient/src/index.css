@@ -1,7 +1,15 @@
 body{
-  background-color: rgb(80, 162, 131);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(59, 62, 100);
   font-family: Raleway, sans-serif;
   font-size: larger;
+}
+html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 h1{
@@ -19,4 +27,15 @@ button {
                 color: white;
                 cursor: pointer;
                 border: none;
+}
+
+input{
+  background-color: beige;
+  border-radius: 5px;
+  border: none;
+  padding: 3px 10px;
+  margin-left: 3px;
+  font-family: Raleway;
+  font-weight: bold;
+  color: rgb(8, 156, 20)
 }
