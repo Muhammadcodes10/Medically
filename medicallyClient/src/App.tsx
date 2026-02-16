@@ -5,7 +5,7 @@ import {
     // Pin,
     // InfoWindow
 } from '@vis.gl/react-google-maps'
-import { useState } from 'react';
+import { useState, useRef, useEffect} from 'react';
 
 // Done with the map design for now, back to the frontend interface itself/ [12/02/26].
 function Intro(){
@@ -101,7 +101,12 @@ function TopBar(){
 
 function ClientTestimonials(){
   const [index, setIndex] =useState(0)
-  const cardNumber = document.getElementsByTagName('article').length;
+  const articleRef = useRef<HTMLDivElement | null>(null)
+  const [cardNumber, setCardNumber] = useState(0)
+  useEffect(() => {
+    setCardNumber(articleRef.current?.getElementsByTagName("article").length??0)
+  }, [])
+
   return(
     <>
     <section>
@@ -116,7 +121,7 @@ function ClientTestimonials(){
       }
         }>🔙</button>
       <div className ='carousel'>
-      <div className='articleList' style={{
+      <div className='articleList' ref={articleRef} style={{
           transform: `translateX(-${index * 50}%)`
         }}> 
 
@@ -181,7 +186,7 @@ function ClientTestimonials(){
       </div>
       </div>
       <button className='next' onClick={() => {
-        if (index === cardNumber - 1){
+        if (index === cardNumber - 1 && cardNumber-1>=0){
           setIndex(index+0)
         }
         else{
