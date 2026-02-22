@@ -17,8 +17,10 @@ function Intro(){
             <Map mapId={"cac5666d3af318eaf31e234b"} defaultZoom={10}
       defaultCenter={position} style={{ height: "100%", width: "100%" }}  >
               <AdvancedMarker position={position}>
+            <div style={{ color: "Darkblue", fontSize: 100, bottom: 10}}> Chemotheraphy is offered at Belam</div>
 
               </AdvancedMarker>
+              
             </Map>
           </div>
           </APIProvider>
@@ -28,8 +30,8 @@ function Intro(){
 function About(){
   return (
     <>
-    <h1>Background and social responsiblity values</h1>
-    <h3> About us </h3>
+    <h1>About us</h1>
+    <h3>Background and purpose</h3>
     <p className='aboutText'>
       Medico is a healthcare technology service built in Q1, 2026 in Abuja.
       <br/>
@@ -51,14 +53,13 @@ function About(){
       <br/>
       As providers of healthcare technology, we adopt an ethical code that prohibits the generation of revenue through selling of user data for targeted ads.
       </p>
-      <h3> Founder </h3>
-    <p className='aboutText'> Medico was founded by Muhammad Al-amin Bello. </p>
+      
     </>
   )
 }
 
 function Search(){
-  const [clicked, setClicked] = useState(true)
+  const [clicked, setClicked] = useState(false)
   const [showH1, setShowH1] = useState(true)
 
   useEffect(() => {
@@ -72,7 +73,11 @@ function Search(){
     <h1 style={{color: "green"}} > { showH1 ? "Get your medical treatment(s) at a discounted rate today!" : null }</h1>
     <form>
       <label htmlFor="searchbar" className='TreatmentText'><strong>What treatment are we looking for today?</strong> </label>
-      <input type="text" id="searchbar"></input>  
+      <input type="text" id="searchbar" onKeyPress={(e) => {
+        if (e.key === "Enter"){
+          setClicked(true)
+        }
+        }}></input>  
     </form>    <h1> How to use: </h1>
     <ul>
           <li className='TreatmentText'>Open live location </li>
@@ -80,7 +85,8 @@ function Search(){
           <li className='TreatmentText'>Medico provides direction to the nearest hospital that offers your desired treatment. </li>
     </ul>
 
-      <button type="submit" onClick={() => setClicked(true)}>Open maps</button>
+      {/* <button type="submit" onClick={() => setClicked(true)}>Open maps</button> */}
+      {console.log(clicked)}
       {clicked === true && <Intro/>}
     </>
   )
@@ -92,12 +98,10 @@ function TopBar(){
     <header className="header">
   <nav className="navbar">
     <div className='logo'>  <strong> <a href='#'>Medico🩺</a></strong></div>
-    <div className='midLinks'> Client testimonials</div>
-    <div className='midLinks'> Faqs</div>
     <ul className="nav-links">
       <li><a  target='_blank' className='links'>About</a></li>
-      <li><a href="#" className='links'>Mission</a></li>
-      <li><a href="#" className='links'>Research</a></li>
+      <li><a href="#" className='links'>Client Testimonials</a></li>
+      <li><a href="#" className='links'>Faqs</a></li>
       <li><a href="#" className='links'>Contact</a></li>
     </ul>
   </nav>
@@ -240,7 +244,6 @@ function FAQs(){
   )
 }
 
-
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -349,7 +352,6 @@ function Contact() {
     </div>
   );
 }
-
 
 function App() {
   
