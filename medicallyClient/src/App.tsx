@@ -28,53 +28,61 @@ function Intro(){
 function About(){
   return (
     <>
+    <h1>Background and social responsiblity values</h1>
+    <h3> About us </h3>
     <p className='aboutText'>
-      At Medico, we Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quam consequatur deleniti adipisci aut explicabo error labore eligendi quae soluta repellendus nihil dolore, maiores dolores dolorum accusantium dicta aliquam in eius provident? Ullam quam at error in nihil eligendi eaque laborum magnam, accusamus maiores, quisquam doloribus illo vel magni hic minima perspiciatis nam dolorem animi cum ut commodi? Omnis cupiditate sapiente quibusdam corrupti tempore perferendis rerum nostrum tempora eaque obcaecati deleniti necessitatibus voluptate fugiat repudiandae natus hic, distinctio magni nam, minima sit porro. Libero at sapiente reiciendis distinctio, provident veritatis esse iusto nulla quia nobis, assumenda molestiae magnam, excepturi ullam! Pariatur enim quas hic neque, odio autem fugit eligendi excepturi aliquam provident. Aut cupiditate reprehenderit iste eligendi autem sequi ut quos fuga repellendus voluptatem. Aut, sed cupiditate! Dolor est consequuntur sequi molestias cum temporibus ratione possimus eligendi cumque nostrum, aut architecto ipsa soluta voluptas maxime inventore! Odit impedit, provident reiciendis repudiandae voluptatum voluptates dignissimos veritatis eius itaque. Obcaecati quas facilis praesentium cum, ab consectetur nemo, veniam exercitationem unde recusandae eius? Maxime doloremque quidem distinctio eaque id, quod nulla labore voluptatibus voluptates ipsam numquam nesciunt, velit obcaecati ipsum odio provident sunt alias, quisquam quas! Quae magnam facilis reiciendis earum, quis, officiis quaerat corrupti quos molestiae nihil ipsa dicta assumenda aut dignissimos voluptas dolor ullam minima culpa velit hic! Repudiandae enim corrupti, totam dolor quis maiores quo aut ex, error dignissimos beatae! Eos expedita, fugiat assumenda exercitationem eaque, quam et blanditiis obcaecati, laboriosam excepturi nisi dicta dolor minus inventore quisquam voluptatem. Ea iure, cupiditate consectetur quae ad iste dignissimos quas quos repellendus, repellat officiis repudiandae reprehenderit. Eligendi, eos molestiae ipsam voluptas est quia laboriosam dignissimos impedit quaerat in unde blanditiis ipsa. Eveniet magni delectus porro necessitatibus. Id accusamus nam commodi consequatur explicabo dolores ab. Beatae impedit cumque non eum reprehenderit ex dicta!
+      Medico is a healthcare technology service built in Q1, 2026 in Abuja.
+      <br/>
+      <br/>
+      At Medico, our purpose is to bridge the gap that exists between Healthcare and Technology. The Healthcare sector in Nigeria remains one of the most neglected around the world, and we are here to fix that. 
+      <br/>
+      <br/>
+      As a healthTech service, we believed everyone deserves good healthcare. Our partnerships with regional healthcare providers and our creative pricing models allow us to increase access to treatments where they're needed most.
+      <br/>
+      <br/>
+      Medico was developed to answer three important questions:<strong> Which hospital? Where is it? How much does it cost?. </strong> Medico was built with the people in mind. Our product was made to help people with limited resources access proper medical care from the start to finish.
+      <br/>
+      <br/>
+      As a patient-oriented service, we aim to extend the healthcare umbrella to cover those at the edges, making healthcare accessible to all.
     </p>
-
+    <h3> Our responsibilities </h3>
+    <p className='aboutText'> At Medico, we ensure full patient confidentiality. Patients' medical history are not stored on any of our databases.
+      <br/>
+      <br/>
+      As providers of healthcare technology, we adopt an ethical code that prohibits the generation of revenue through selling of user data for targeted ads.
+      </p>
+      <h3> Founder </h3>
+    <p className='aboutText'> Medico was founded by Muhammad Al-amin Bello. </p>
     </>
   )
 }
 
 function Search(){
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(true)
+  const [showH1, setShowH1] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowH1(false)
+    }, 4500);
+    return () => clearTimeout(timer)
+}, [])
   return(
     <>
+    <h1 style={{color: "green"}} > { showH1 ? "Get your medical treatment(s) at a discounted rate today!" : null }</h1>
     <form>
-      <label htmlFor="searchbar" className='TreatmentText'>What treatment are we looking for today? </label>
+      <label htmlFor="searchbar" className='TreatmentText'><strong>What treatment are we looking for today?</strong> </label>
       <input type="text" id="searchbar"></input>  
-    </form>
-    <h1> How to use: </h1>
+    </form>    <h1> How to use: </h1>
     <ul>
           <li className='TreatmentText'>Open live location </li>
           <li className='TreatmentText'>Search for particular treatment </li>
-          <li className='TreatmentText'>Nearest Hospital plus direction will be shown. </li>
+          <li className='TreatmentText'>Medico provides direction to the nearest hospital that offers your desired treatment. </li>
     </ul>
 
-      <button type="submit" onClick={() => setClicked(true)}>Submit</button>
+      <button type="submit" onClick={() => setClicked(true)}>Open maps</button>
       {clicked === true && <Intro/>}
     </>
-  )
-}
-
-function FAQs(){
-  return (
-    <>
-    <h1> FAQs:</h1>
-    <details>
-      <summary>
-        <strong>Can I pay for my treatment on Medico?</strong>
-      </summary>
-      <div> Yes you can.</div>
-    </details>
-    <details>
-      <summary>
-      <strong>Do we have an Internal wallet?</strong>
-      </summary>
-      <div> At the moment we do not provide this but we are working towars its integration.</div>
-    </details>
-    </>
-
   )
 }
 
@@ -87,10 +95,10 @@ function TopBar(){
     <div className='midLinks'> Client testimonials</div>
     <div className='midLinks'> Faqs</div>
     <ul className="nav-links">
-      <li><a href="https://google.com" target='_blank'>About</a></li>
-      <li><a href="#">Mission</a></li>
-      <li><a href="#">Research</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a  target='_blank' className='links'>About</a></li>
+      <li><a href="#" className='links'>Mission</a></li>
+      <li><a href="#" className='links'>Research</a></li>
+      <li><a href="#" className='links'>Contact</a></li>
     </ul>
   </nav>
 </header>
@@ -104,7 +112,7 @@ function ClientTestimonials(){
   const articleRef = useRef<HTMLDivElement | null>(null)
   const [cardNumber, setCardNumber] = useState(0)
   useEffect(() => {
-    setCardNumber(articleRef.current?.getElementsByTagName("article").length??0)
+    setCardNumber(-1 + (articleRef.current?.getElementsByTagName("article").length ?? 0 as number))
   }, [])
 
   return(
@@ -126,11 +134,11 @@ function ClientTestimonials(){
         }}> 
 
         <article className='card'>
-          <img src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEBUSExIWFhMVFhgXGRgYFRgZGBcYFhcWGBcaFhgYHSghGhomHhcYITIiJSk3Li8uGB8zODMsNygtLisBCgoKDg0OGxAQGy0lHSUwLSstNi0tNS0tLS0wLS0wLS8tLS03MCstNS8vNi0vLzAvLS4rLS0uLS0tNS03LS0rLf/AABEIAPsAyQMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABgcCBQEECAP/xABGEAACAgECAwUEBgYHBgcAAAABAgADEQQFEiExBgcTQVEiMmFxFCNCUoGRF1STobHSJDNEYnKS4RVDwdHi8AhkgoOio7P/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/8QALREBAAICAQIDBgYDAAAAAAAAAAECAxExBCEFElETFBVBUqEiMoGx0fBCYZH/2gAMAwEAAhEDEQA/ALxiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICJi5lfavvNFdj1nSt7DMv9YBnhJGfdlL5K0/M3wdNlzzMY43pYcSt/wBKq/qjftR/LH6VV/VG/aj+WZ+8Y/V0/Cur+j7wsidbcdbXRU9tjBa0UszHoAJAP0qr+qN+1H8s1e69pju1+l0HhGuuy4Nb7eeJKwWK8gMdDLVzUtOolnl8P6jFXz3rqP0bnTrrt2HiG19Hoj7ipyutX7zN1UH0Ei9+l2BLmpb6QzK5ra02sTxhlU8/m3XHkZNaONdVczMB4VgIHPAo4cIKgDw45EEHnmVxuug0x3OupaLvbZrGbgUm7xnNvGmDgKmQoOfsnI9by5q+X/JPL9o122jxdJfZqtOObae5uJgo6ml+uceUl+w7zVq6EvqOVYdD1UjqrDyIkR3t3sKX02txF60pAODniHHxAHHCEFhOeuR0wJqtTvX+yNx1Fa18dWoVLgobhCOch8cjyMTaIjcmPHbJaKVjcytWJWv6VP8Ayh/aj+WYnvUP6p/9v/TMveMfq7vhPV/R94WZErI96jfqo/a/9MJ3oWMwVdKuWIA+sPUnA+zHvGP1J8K6qI3NfvCzYmNZOBnriZTd5xERAREQEREBERAREQOCJDe0/YKrU2G1HNVje9yyrH1I9ZM5wRK2pFo1LXDnyYbebHOpeft+2h9JeabOZABDAYDA+Y/hNdL57RdnKdYgWwe0PdYe8v8Ap8JCn7rbMnGpXHllDn8ec4MnTWifw8PqOk8axWxx7adWV3O3sOtFGv01zHhQOUZvui1SnF+BYH8JNT3W2/rCf5D/AM58dV3XWcB49TWFxzJUjH45kY8WSlvNpPWdd0ufDbHF+8/6n+G419lW36e5L9SpLMCCxUORniwqk5c8geXpKtq3vUjaNVw3NkatK0bl7Nd3EzKpxkKTzwJvtz2+tfq9b7arwqNdVm32B0Rxn6s/GZL2Y2krkbovhnmVxgkjoSPUfLzno8vk5jXaUo7O6qnW6IaevUJxFl+74i5XDFkByAWB5yHdtbg2vKK/iDT1rUW9WHM/lyn00Gk06uRoPrW4/Z1do8KugYwwVuXGfPHwm+0XdkzLxLrK3ySSwBbLHmSTnrMc25rqru8O9nTNGTLOohBolg/ott/WU/yH/nM6+618+1qRjzwhz+8zh92yej6b4v0n1faUO7ObSdVqUpGQG5sR9lR1P/frLa2LsPpdKwsAL2DoznOD6gdAZ2+znZqjRritcs3vOfePw+A+E3c7MOCKR35fP+IeJ3z2mMczFP3cATmInS8kiIgIiICIiAiIgIiICIiAiIgcGU9263m3V6s6ariatDwhF+2w6kgdcS336GVJ2CvWrdLFt5OxsUE+TcecfMic/UTvVfV6nhkRX2mbW5rG4hIe7fszbpg9lw4TYAAh58s59odJVWh0QbeBSQCPpbLgjlgWMcY9OUvDt1v/ANB0F2oHvhcJ8XbkvLz9ZRA7DbvcPpTVcJsbj4ntWtyzknIBIwTn981pWKxqHFnzWzZJyW5lcvb7so+rrr8DCtVxAJ0UhsdMcgRiQbb7NXtWoRrFZUYjiXOVdfPGOXEOs47A9sdbo9Ym37iH4LDwobffrb7OG+0h6deWRJJ3t65ClVIILhix+AxgZ+Z/hMM9Ij8ccvS8N6i95jprRuk7/RYuntDqGU5VgCD6g8xPrNV2VqZNFQre8Klz+U2s6YncPIvWK2mIIiJKpERAREQEREBERAREQEREBERAREQMTKt71dnq06nXizgYsBwgHLv5FSOh5dfhLTlcd++3NZtgsX/c2Kzf4W9kn48yJS9ItGpbYOovgt5qSrI7lu26NXQiPYKiLkRgFzwEYJd8Bx05Zlr932/HdKLa9ZUnjaa4Blx7OVOUIHMZDKRyPlM+wfa/S6qijSpYy3rQoIK4OUADcJPI9JH9h7N6rS7xq6tJqE4OFL+G3iI+uLjLKhGWBVuvkRJiNQztabTuWPfvvVSJTpTSllrhrA5OHp4SAjKRz5ni/wAs1HdImn19rDU2M+pqw4RjysQY9ok8zg4BHxHrJJ3l9l6RtNlt1gbVVE2rcwAZ3JBNYH3CMKF8sCdPZu3OytbTrLOKnVV0+EfZOCCACDw8m6cotWLcr4818cT5J1tbaiczr7fra7q1tqYPW4yrDoQZ2JZkREQEREBERAREQEREBERAREQET5am5URnY4VQST6ADJM1XZntPptfW1mmcuiPwElWXngHkGAOMGBuonWu19SMqNYgZjhVLDJPoBOzCImJJTvfVrr9RqtNtlCli/1hQfabnw59AACZcUr3tDtx8bW6+t1r1WlUCuxvdCCsM6uPNTk/HMJQ27uo3Cunxa7K/FAzwIzKwPorjkTK4t1Wr0+oYtZdXqFOHPGwsB+JzL62LtWtigJvGjvsOPZerwc+oHthh+RkJ74dj1t941Y0YFS1BGepxaWIJPE2AG4RnAOJCYVvuG6X3kG66y3HTjdmx8smdOBOCZCz0j3KMTtFWfJ7APlxSdyN93W1nTbZp6iMN4YZh/ef2j/GSSWUInS3Dc6aOE22KgY4BbkM/PynX3PfaqqfGB8QFlUBCCWLsFAHP4wrN6xy2sTENymULEREBERAREQEREBERAhve3u9ml2u2ytQeIips/ZS3KEj45Ikd7AdmbdDtthuvKq+LytPNwnhgBTyzk46iSvvP2xtTtOpqRS7lAyqBklkZWAA9eUq/ur7QaivdzTq+NW1FQqAcFSpqUmsAHoOHiEhFo3WYS7s9oLWsOpTScLnkjXsQEX7xz7TufXlLD0l4ZfeViOTcJyOLHOQbtJsbC+pK2sveziytzu1aj75xgcvTzna0Gpo2yxNKApVxxWWDqthPV1HJUPQSsdnDhn2UzWePVN5TXertGpO40qrsul170UWhTyJVxyb0OCceuJcaNkTob9s9Oroai5co2DyOGVgcqyEdGB5gy7vRbeatLp3r0Gl0FN2odCwRlUIiLy4rXwSOfL1Mr/ce1et2vc6kupSioKGemhi1dtbFgGXi6EEEdB0kc1vajWaLc9Q9epNllbNp/EtUMWrqYgBumT159Zpu0vaG/X3i/UFTYEWv2RwrwqWI5ZPmxP4yE6XltXb/Y3QuTXSTklXpwxPn0UgysN2Gi1u+0Lo1xRbdUHHDwgkNlyq+QIGJB5t+yGtFG46S1vdTUV5+TNwk/gGzCXrMQYE1XaLdPo9DWY59ByOAT0LHyHxjemdreWNy1Pabd76LQDVUdMwx4lmeEN6PgHhz5HpOl2e0aal0vOirrQMWFiOebIeR4McwT0M+m2JfpqCtla6qm3Lu9Z4my/NuJTyYeXL06TuajU06DbL9RWX8NK2sRXz7JIwiAHmBxEDHxkR37uWlZvfc8ekqu7V9qNRqG3dEubwampSoA44WDlGKkc+bKfOXyvSeZuxPZnWayi6ylgV8ekXIcZs4X8QsD6jiY4npkSYdrmIiSgiIgIiICIiAiIgDPPnfTqmr3dHRTXbWiMrg54irZRh6EEEET0HKY/8QW2c9NqQPvVMf/kuf3yJTCb9l+0Y3XQ+JTYKr8BbMAMa2+1wg+R6gzDVNXplfTaZA9xHFdbb7QQHn4lzH3j6L/ASmu7ZNTXY+rp1VOnrrZEfxi3BYbDhUIUeZ8/LMudNyr3Cm7SEfR9Zw4sqbBYfdZSOVtR8mHkfIwwzY9xuOWO2doHppRnquejIH0hyuSXbAbwxzCZPL0GJLxZnOCCRIVvCanwVOqFaU1cP1dbFmvsBArXmBwrxY5TX7NqNQl1umD/0m65WZuorThVrD6ch7I+MjemFc00tFbcKo7R9htyptd7dOz8bM5er21JZix6c/ORm7TWJ79br/iRl/iJ6i0PaUW6zwETNfC2Lc8mZCAwUeYGcZne2vV1aurxPDHDxOvtKpzwMVJ+RIk8uquatuJeT9Fp3ucJUpsc9FUcR/dJhtfddul2D4AqHrawXH4DJl8VNpqNV4KUJW71mzjCqoPCQCueueeZpX3qzVPp6/ENC2PcjshGS9R5IGPTI5yFb5617fNvdXvtenCV2sTaUGQis+DjBY8IyFz5yIW26n6Qq2PZ9Kst5DP8ARWo8wqnkRw+vtZn21G3uupuray+x1rVlNTKtllWSOFieWVOefLOZsNj2k2JaL67F02VapbnzahA9t+LOVBPxkT3clpvltrj+/NuNDsfgXcVNhSls8VJGU4vI1/c+I6SB9+e7E10bfVlrNQ6sVHUgHCLj4sQfwne3jvJDeJXoVDJTgW6q0N4FZJ4QECgta5PIKo5ma2rY7NDdqN43HUJqXqp4qMDhJZhy9huanJCgeXETLO6tYrHZx3f8ek3NNspYFKaGs1ZxkNe/CcA+XD0H4y3ZVPcVtrtXqdfdzs1Nh9r1AJLH5cRP4S1pKxERAREQEREBERAREQEhXfBt3jbRqD50gXD/ANs5P7syazC2sMCCAQQQQRkEHqCPMQPKPZvtG+kLqUW3T28raHA4XHTOfJh5GTPtFpfpOg0ur2uyxvoXiBwWP0mlXYOq8ubInMD+7Mu83uzOl4tVo1J0/V6xzNXxX1T+EgXZ3fr9FeL6Gw3Rl6rYvmrjzH8JCyzexfe8Dw07ioI5YvUZHLobF8v8Qljts9V6236a0BtSF4rUIb2B1CehIlM73sNG40Nr9tXhsXnqdJ9pD9p6h5gnngfhIPpddbV/VXW14+5Y6YP/AKSOcKWx1tzD0ppuzLafU1vSWNS02qFZs8LNgqF+BxPr2Pstqqr01mmsQqGy54ShJYseYPxlAaPt3ulXu6+8gffYWf8A6AmWb3ad6FmpuXSazh8Vv6u0ALxnrwuo5BviJERDKvTxSd17Jx2p2T6RZpn8MOK7DxqTjNbKQ3zwQpxMKOyifXVsAKHdbKwpIatgMEqR06ZkM7wu9g0O2m0IVrF5PcwyiHzCL9ph6nl85Ue5dpddqCTdrL3z5eIyr+CIQo/KNQn2FJmZmHoLWbvtu18dluo4rmGDl/EtIHRQB0Eqftj3h6vc3Gl06NXS7BVrU5stz0DkdB8B6c5Dtm2W/VWeHp6Wscnngch8XbyEsJvo/Z+vAKX7q64z1TTKf+P7zj0kta0isahtd81VGz7ZpdJYEt11ebEQe4ljZxZaB73DnAz1xKq01F+v1aJxNZffYBljk5bmzfAAZPyE6us1VltjWWOz2OeJmY5Yk/8AfSXr3NdiDpq/pl64vtXCKetdZ5/gzcs/DlC3Cwdj2tNLp6tPX7taBfnjqfmTznfiJKpERAREQEREBERAREQEREDhlBGD0Mo/vP7sDWX1miXNZJaykdU9Wq/u+ZXy549JeM4IgeQ9k3e7SXrfQ5SxfyYeasPNT6THeNxbU32XsqK1jcRVF4VHyEtDvl7B10o24afCLxKLq/LLsFDpjoeIjI+OZUchbkmdVhUhlJDDoQcEfKYRIAxEQNts3aPVaRLU09prF2AxAHFy+6T0mrdyzFiSzMeZJyST8T1MwY4GfSX33Zd2tNNdWs1GLbnVbEXHsVhgGGAfebB6n8JMG2m7q+7Riy63WpgDDVUnqT5PYPT0X8TLpAgCcyVSIiAiIgIiICIiAiIgIiICIiAiIgRnvI2x9TtepprXisZAUUYyWVlYAZ+UoJO7vdj/AGGwfNq/5p6Z3PVrVU9rdEUt+QkK7DdodTbe1WpfPi1+LVkAYXJyOQ9CPylZmIY36itLxSeZVAvdpux/sZHzev8Amn3Xur3Y/wBnUfO1ZNre1WtAucatgUtKqnhKVI4j1bhwPxkqu3m//aWkq8QCuylXdQAVLHiyQcZxy9ZEWiWVOurb5ekf9VIvdLux/wB1UPnb/pPovdBup+xQPncf5JbnZferH1WtW636up1CcXCAuWcdcD0HWZaLd7W3i2g2ZoFPEFwuAfY55xnz9ZO4aR1NZiJ9Z0qQ9zW6EEf0cZGP61v5J6A2rTmuiqs4ylaIcdMqoHL8pBNr7U3vrwWf+iW2PVWMDAK9DnGeeP3yxRETEpw565Yma/JzERLNiIiAiIgIiICIiAiIgIiICIiAiIgaztFtH0qhqPEKBsZIAJwDnHP1mm0vYWqq6m6q11arqCSwcYwRzPsjGeklkSPLHLK2DHa3mmO6EN3egh1+l2iuxy7IFXByc9ZsN27Gpb4JqtemyhQiOoBPCByBz1/1kniR5YUjpcURMa5RPS9hal091L2PY15BewgZypypA+B5zjaexfgm121L2W2VmoOVAKKRjkMnJ5D8pLYk+WE+7Yu3bhCR3cULWipdYtiMGD9eYOR7BOB5SaIuBMoiIiF8eGmP8saIiJLQiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiB/9k=' alt='Blackrock image' width={460} height={255}/>
+          <img src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEBUSExIWFhMVFhgXGRgYFRgZGBcYFhcWGBcaFhgYHSghGhomHhcYITIiJSk3Li8uGB8zODMsNygtLisBCgoKDg0OGxAQGy0lHSUwLSstNi0tNS0tLS0wLS0wLS8tLS03MCstNS8vNi0vLzAvLS4rLS0uLS0tNS03LS0rLf/AABEIAPsAyQMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABgcCBQEECAP/xABGEAACAgECAwUEBgYHBgcAAAABAgADEQQFEiExBgcTQVEiMmFxFCNCUoGRF1STobHSJDNEYnKS4RVDwdHi8AhkgoOio7P/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/8QALREBAAICAQIDBgYDAAAAAAAAAAECAxExBCEFElETFBVBUqEiMoGx0fBCYZH/2gAMAwEAAhEDEQA/ALxiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICJi5lfavvNFdj1nSt7DMv9YBnhJGfdlL5K0/M3wdNlzzMY43pYcSt/wBKq/qjftR/LH6VV/VG/aj+WZ+8Y/V0/Cur+j7wsidbcdbXRU9tjBa0UszHoAJAP0qr+qN+1H8s1e69pju1+l0HhGuuy4Nb7eeJKwWK8gMdDLVzUtOolnl8P6jFXz3rqP0bnTrrt2HiG19Hoj7ipyutX7zN1UH0Ei9+l2BLmpb6QzK5ra02sTxhlU8/m3XHkZNaONdVczMB4VgIHPAo4cIKgDw45EEHnmVxuug0x3OupaLvbZrGbgUm7xnNvGmDgKmQoOfsnI9by5q+X/JPL9o122jxdJfZqtOObae5uJgo6ml+uceUl+w7zVq6EvqOVYdD1UjqrDyIkR3t3sKX02txF60pAODniHHxAHHCEFhOeuR0wJqtTvX+yNx1Fa18dWoVLgobhCOch8cjyMTaIjcmPHbJaKVjcytWJWv6VP8Ayh/aj+WYnvUP6p/9v/TMveMfq7vhPV/R94WZErI96jfqo/a/9MJ3oWMwVdKuWIA+sPUnA+zHvGP1J8K6qI3NfvCzYmNZOBnriZTd5xERAREQEREBERAREQOCJDe0/YKrU2G1HNVje9yyrH1I9ZM5wRK2pFo1LXDnyYbebHOpeft+2h9JeabOZABDAYDA+Y/hNdL57RdnKdYgWwe0PdYe8v8Ap8JCn7rbMnGpXHllDn8ec4MnTWifw8PqOk8axWxx7adWV3O3sOtFGv01zHhQOUZvui1SnF+BYH8JNT3W2/rCf5D/AM58dV3XWcB49TWFxzJUjH45kY8WSlvNpPWdd0ufDbHF+8/6n+G419lW36e5L9SpLMCCxUORniwqk5c8geXpKtq3vUjaNVw3NkatK0bl7Nd3EzKpxkKTzwJvtz2+tfq9b7arwqNdVm32B0Rxn6s/GZL2Y2krkbovhnmVxgkjoSPUfLzno8vk5jXaUo7O6qnW6IaevUJxFl+74i5XDFkByAWB5yHdtbg2vKK/iDT1rUW9WHM/lyn00Gk06uRoPrW4/Z1do8KugYwwVuXGfPHwm+0XdkzLxLrK3ySSwBbLHmSTnrMc25rqru8O9nTNGTLOohBolg/ott/WU/yH/nM6+618+1qRjzwhz+8zh92yej6b4v0n1faUO7ObSdVqUpGQG5sR9lR1P/frLa2LsPpdKwsAL2DoznOD6gdAZ2+znZqjRritcs3vOfePw+A+E3c7MOCKR35fP+IeJ3z2mMczFP3cATmInS8kiIgIiICIiAiIgIiICIiAiIgcGU9263m3V6s6ariatDwhF+2w6kgdcS336GVJ2CvWrdLFt5OxsUE+TcecfMic/UTvVfV6nhkRX2mbW5rG4hIe7fszbpg9lw4TYAAh58s59odJVWh0QbeBSQCPpbLgjlgWMcY9OUvDt1v/ANB0F2oHvhcJ8XbkvLz9ZRA7DbvcPpTVcJsbj4ntWtyzknIBIwTn981pWKxqHFnzWzZJyW5lcvb7so+rrr8DCtVxAJ0UhsdMcgRiQbb7NXtWoRrFZUYjiXOVdfPGOXEOs47A9sdbo9Ym37iH4LDwobffrb7OG+0h6deWRJJ3t65ClVIILhix+AxgZ+Z/hMM9Ij8ccvS8N6i95jprRuk7/RYuntDqGU5VgCD6g8xPrNV2VqZNFQre8Klz+U2s6YncPIvWK2mIIiJKpERAREQEREBERAREQEREBERAREQMTKt71dnq06nXizgYsBwgHLv5FSOh5dfhLTlcd++3NZtgsX/c2Kzf4W9kn48yJS9ItGpbYOovgt5qSrI7lu26NXQiPYKiLkRgFzwEYJd8Bx05Zlr932/HdKLa9ZUnjaa4Blx7OVOUIHMZDKRyPlM+wfa/S6qijSpYy3rQoIK4OUADcJPI9JH9h7N6rS7xq6tJqE4OFL+G3iI+uLjLKhGWBVuvkRJiNQztabTuWPfvvVSJTpTSllrhrA5OHp4SAjKRz5ni/wAs1HdImn19rDU2M+pqw4RjysQY9ok8zg4BHxHrJJ3l9l6RtNlt1gbVVE2rcwAZ3JBNYh5CMKF8sCdPZu3OytbTrLOKnVV0+EfZOCCACDw8m6cotWLcr4818cT5J1tbaiczr7fra7q1tqYPW4yrDoQZ2JZkREQEREBERAREQEREBERAREQET5am5URnY4VQST6ADJM1XZntPptfW1mmcuiPwElWXngHkGAOMGBuonWu19SMqNYgZjhVLDJPoBOzCImJJTvfVrr9RqtNtlCli/1hQfabnw59AACZcUr3tDtx8bW6+t1r1WlUCuxvdCCsM6uPNTk/HMJQ27uo3Cunxa7K/FAzwIzKwPorjkTK4t1Wr0+oYtZdXqFOHPGwsB+JzL62LtWtigJvGjvsOPZerwc+oHthh+RkJ74dj1t941Y0YFS1BGepxaWIJPE2AG4RnAOJCYVvuG6X3kG66y3HTjdmx8smdOBOCZCz0j3KMTtFWfJ7APlxSdyN93W1nTbZp6iMN4YZh/ef2j/GSSWUInS3Dc6aOE22KgY4BbkM/PynX3PfaqqfGB8QFlUBCCWLsFAHP4wrN6xy2sTENymULEREBERAREQEREBERAhve3u9ml2u2ytQeIips/ZS3KEj45Ikd7AdmbdDtthuvKq+LytPNwnhgBTyzk46iSvvP2xtTtOpqRS7lAyqBklkZWAA9eUq/ur7QaivdzTq+NW1FQqAcFSpqUmsAHoOHiEhFo3WYS7s9oLWsOpTScLnkjXsQEX7xz7TufXlLD0l4ZfeViOTcJyOLHOQbtJsbC+pK2sveziytzu1aj75xgcvTzna0Gpo2yxNKApVxxWWDqthPV1HJUPQSsdnDhn2UzWePVN5TXertGpO40qrsul170UWhTyJVxyb0OCceuJcaNkTob9s9Oroai5co2DyOGVgcqyEdGB5gy7vRbeatLp3r0Gl0FN2odCwRlUIiLy4rXwSOfL1Mr/ce1et2vc6kupSioKGemhi1dtbFgGXi6EEEdB0kc1vajWaLc9Q9epNllbNp/EtUMWrqYgBumT159Zpu0vaG/X3i/UFTYEWv2RwrwqWI5ZPmxP4yE6XltXb/Y3QuTXSTklXpwxPn0UgysN2Gi1u+0Lo1xRbdUHHDwgkNlyq+QIGJB5t+yGtFG46S1vdTUV5+TNwk/gGzCXrMQYE1XaLdPo9DWY59ByOAT0LHyHxjemdreWNy1Pabd76LQDVUdMwx4lmeEN6PgHhz5HpOl2e0aal0vOirrQMWFiOebIeR4McwT0M+m2JfpqCtla6qm3Lu9Z4my/NuJTyYeXL06TuajU06DbL9RWX8NK2sRXz7JIwiAHmBxEDHxkR37uWlZvfc8ekqu7V9qNRqG3dEubwampSoA44WDlGKkc+bKfOXyvSeZuxPZnWayi6ylgV8ekXIcZs4X8QsD6jiY4npkSYdrmIiSgiIgIiICIiAiIgDPPnfTqmr3dHRTXbWiMrg54irZRh6EEEET0HKY/8QW2c9NqQPvVMf/kuf3yJTCb9l+0Y3XQ+JTYKr8BbMAMa2+1wg+R6gzDVNXplfTaZA9xHFdbb7QQHn4lzH3j6L/ASmu7ZNTXY+rp1VOnrrZEfxi3BYbDhUIUeZ8/LMudNyr3Cm7SEfR9Zw4sqbBYfdZSOVtR8mHkfIwwzY9xuOWO2doHppRnquejIH0hyuSXbAbwxzCZPL0GJLxZnOCCRIVvCanwVOqFaU1cP1dbFmvsBArXmBwrxY5TX7NqNQl1umD/0m65WZuorThVrD6ch7I+MjemFc00tFbcKo7R9htyptd7dOz8bM5er21JZix6c/ORm7TWJ79br/iRl/iJ6i0PaUW6zwETNfC2Lc8mZCAwUeYGcZne2vV1aurxPDHDxOvtKpzwMVJ+RIk8uquatuJeT9Fp3ucJUpsc9FUcR/dJhtfddul2D4AqHrawXH4DJl8VNpqNV4KUJW71mzjCqoPCQCueueeZpX3qzVPp6/ENC2PcjshGS9R5IGPTI5yFb5617fNvdXvtenCV2sTaUGQis+DjBY8IyFz5yIW26n6Qq2PZ9Kst5DP8ARWo8wqnkRw+vtZn21G3uupuray+x1rVlNTKtllWSOFieWVOefLOZsNj2k2JaL67F02VapbnzahA9t+LOVBPxkT3clpvltrj+/NuNDsfgXcVNhSls8VJGU4vI1/c+I6SB9+e7E10bfVlrNQ6sVHUgHCLj4sQfwne3jvJDeJXoVDJTgW6q0N4FZJ4QECgta5PIKo5ma2rY7NDdqN43HUJqXqp4qMDhJZhy9huanJCgeXETLO6tYrHZx3f8ek3NNspYFKaGs1ZxkNe/CcA+XD0H4y3ZVPcVtrtXqdfdzs1Nh9r1AJLH5cRP4S1pKxERAREQEREBERAREQEhXfBt3jbRqD50gXD/ANs5P7syazC2sMCCAQQQQRkEHqCPMQPKPZvtG+kLqUW3T28raHA4XHTOfJh5GTPtFpfpOg0ur2uyxvoXiBwWP0mlXYOq8ubInMD+7Mu83uzOl4tVo1J0/V6xzNXxX1T+EgXZ3fr9FeL6Gw3Rl6rYvmrjzH8JCyzexfe8Dw07ioI5YvUZHLobF8v8Qljts9V6236a0BtSF4rUIb2B1CehIlM73sNG40Nr9tXhsXnqdJ9pD9p6h5gnngfhIPpddbV/VXW14+5Y6YP/AKSOcKWx1tzD0ppuzLafU1vSWNS02qFZs8LNgqF+BxPr2Pstqqr01mmsQqGy54ShJYseYPxlAaPt3ulXu6+8gffYWf8A6AmWb3ad6FmpuXSazh8Vv6u0ALxnrwuo5BviJERDKvTxSd17Jx2p2T6RZpn8MOK7DxqTjNbKQ3zwQpxMKOyifXVsAKHdbKwpIatgMEqR06ZkM7wu9g0O2m0IVrF5PcwyiHzCL9ph6nl85Ue5dpddqCTdrL3z5eIyr+CIQo/KNQn2FJmZmHoLWbvtu18dluo4rmGDl/EtIHRQB0Eqftj3h6vc3Gl06NXS7BVrU5stz0DkdB8B6c5Dtm2W/VWeHp6Wscnngch8XbyEsJvo/Z+vAKX7q64z1TTKf+P7zj0kta0isahtd81VGz7ZpdJYEt11ebEQe4ljZxZaB73DnAz1xKq01F+v1aJxNZffYBljk5bmzfAAZPyE6us1VltjWWOz2OeJmY5Yk/8AfSXr3NdiDpq/pl64vtXCKetdZ5/gzcs/DlC3Cwdj2tNLp6tPX7taBfnjqfmTznfiJKpERAREQEREBERAREQEREDhlBGD0Mo/vP7sDWX1miXNZJaykdU9Wq/u+ZXy549JeM4IgeQ9k3e7SXrfQ5SxfyYeasPNT6THeNxbU32XsqK1jcRVF4VHyEtDvl7B10o24afCLxKLq/LLsFDpjoeIjI+OZUchbkmdVhUhlJDDoQcEfKYRIAxEQNts3aPVaRLU09prF2AxAHFy+6T0mrdyzFiSzMeZJyST8T1MwY4GfSX33Zd2tNNdWs1GLbnVbEXHsVhgGGAfebB6n8JMG2m7q+7Riy63WpgDDVUnqT5PYPT0X8TLpAgCcyVSIiAiIgIiICIiAiIgIiICIiAiIgRnvI2x9TtepprXisZAUUYyWVlYAZ+UoJO7vdj/AGGwfNq/5p6Z3PVrVU9rdEUt+QkK7DdodTbe1WpfPi1+LVkAYXJyOQ9CPylZmIY36itLxSeZVAvdpux/sZHzev8Amn3Xur3Y/wBnUfO1ZNre1WtAucatgUtKqnhKVI4j1bhwPxkqu3m//aWkq8QCuylXdQAVLHiyQcZxy9ZEWiWVOurb5ekf9VIvdLux/wB1UPnb/pPovdBup+xQPncf5JbnZferH1WtW636up1CcXCAuWcdcD0HWZaLd7W3i2g2ZoFPEFwuAfY55xnz9ZO4aR1NZiJ9Z0qQ9zW6EEf0cZGP61v5J6A2rTmuiqs4ylaIcdMqoHL8pBNr7U3vrwWf+iW2PVWMDAK9DnGeeP3yxRETEpw565Yma/JzERLNiIiAiIgIiICIiAiIgIiICIiAiIgaztFtH0qhqPEKBsZIAJwDnHP1mm0vYWqq6m6q11arqCSwcYwRzPsjGeklkSPLHLK2DHa3mmO6EN3egh1+l2iuxy7IFXByc9ZsN27Gpb4JqtemyhQiOoBPCByBz1/1kniR5YUjpcURMa5RPS9hal091L2PY15BewgZypypA+B5zjaexfgm121L2W2VmoOVAKKRjkMnJ5D8pLYk+WE+7Yu3bhCR3cULWipdYtiMGD9eYOR7BOB5SaIuBMoiIiF8eGmP8saIiJLQiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiB/9k=' alt='Blackrock image' width={460} height={255}/>
           <blockquote> Medico Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste debitis dolorum ratione doloribus in, obcaecati accusantium excepturi. Atque delectus, accusamus quod ut mollitia, alias odio adipisci 
             perferendis Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, cupiditate autem? Corrupti provident mollitia itaque ipsam numquam illo rerum sapiente autem animi! Assumenda temporibus vitae similique aliquid non consectetur ratione. expedita, qui magni. has been our goto service when</blockquote>
             <div>
-              <p>Richard Feynman</p>
+              <p className='authorText'>Richard Feynman</p>
               <span>CEO & Founder</span>
             </div>
           
@@ -141,7 +149,7 @@ function ClientTestimonials(){
           <blockquote> Medico Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste debitis dolorum ratione doloribus in, obcaecati accusantium excepturi. Atque delectus, accusamus quod ut mollitia, alias odio adipisci 
             perferendis Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, cupiditate autem? Corrupti provident mollitia itaque ipsam numquam illo rerum sapiente autem animi! Assumenda temporibus vitae similique aliquid non consectetur ratione. expedita, qui magni. has been our goto service when</blockquote>
             <div>
-              <p>Richard Feynman</p>
+              <p className='authorText'> Richard Feynman</p>
               <span>CEO & Founder</span>
             </div>
           
@@ -153,7 +161,7 @@ function ClientTestimonials(){
           <blockquote> Medico Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste debitis dolorum ratione doloribus in, obcaecati accusantium excepturi. Atque delectus, accusamus quod ut mollitia, alias odio adipisci 
             perferendis Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, cupiditate autem? Corrupti provident mollitia itaque ipsam numquam illo rerum sapiente autem animi! Assumenda temporibus vitae similique aliquid non consectetur ratione. expedita, qui magni. has been our goto service when</blockquote>
             <div>
-              <p>Richard Feynman</p>
+              <p className='authorText'>Richard Feynman</p>
               <span>CEO & Founder</span>
             </div>
           
@@ -164,7 +172,7 @@ function ClientTestimonials(){
           <blockquote> Medico Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste debitis dolorum ratione doloribus in, obcaecati accusantium excepturi. Atque delectus, accusamus quod ut mollitia, alias odio adipisci 
             perferendis Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, cupiditate autem? Corrupti provident mollitia itaque ipsam numquam illo rerum sapiente autem animi! Assumenda temporibus vitae similique aliquid non consectetur ratione. expedita, qui magni. has been our goto service when</blockquote>
             <div>
-              <p>Richard Feynman</p>
+              <p className='authorText'>Richard Feynman</p>
               <span>CEO & Founder</span>
             </div>
           
@@ -175,7 +183,7 @@ function ClientTestimonials(){
           <blockquote> Medico Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste debitis dolorum ratione doloribus in, obcaecati accusantium excepturi. Atque delectus, accusamus quod ut mollitia, alias odio adipisci 
             perferendis Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, cupiditate autem? Corrupti provident mollitia itaque ipsam numquam illo rerum sapiente autem animi! Assumenda temporibus vitae similique aliquid non consectetur ratione. expedita, qui magni. has been our goto service when</blockquote>
             <div>
-              <p>Richard Feynman</p>
+              <p className='authorText'>Richard Feynman</p>
               <span>CEO & Founder</span>
             </div>
           
@@ -202,13 +210,156 @@ function ClientTestimonials(){
     </>
   )
 }
+
+function FAQs(){
+  return (
+    <>
+    <h1> FAQs:</h1>
+    <details>
+      <summary>
+        <strong className='faqText'> Can I pay for my treatment on Medico?</strong>
+      </summary>
+      <div className='faqAnswer'> Yes you can.</div>
+    </details>
+    <br></br>
+    <details>
+      <summary>
+      <strong className='faqText'>Does Medico offer an Internal wallet?</strong>
+      </summary>
+      <div className='faqAnswer'> At the moment we do not provide this but we are working towards its integration.</div>
+    </details>
+     <br></br>
+     <details>
+      <summary>
+      <strong className='faqText'>Do I need to sign up?</strong>
+      </summary>
+      <div className='faqAnswer'> No. At Medico, we are focused on providing healthcare services to everyone, instantly.</div>
+    </details>
+    </>
+
+  )
+}
+
+
+function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    console.log("Form Submitted:", formData);
+
+    setSubmitted(true);
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    });
+  };
+
+  return (
+    <div className="contactDiv">
+      <div className="contactHeader">
+        <h2>Get in touch</h2>
+        <p>
+          Medico was founded with you in mind. Let's make it work better!
+        </p>
+      </div>
+
+      <form className="contactForm" onSubmit={handleSubmit}>
+        <div className="formGroup">
+          <label>Name *</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your full name"
+          />
+        </div>
+
+        <div className="formGroup">
+          <label>Email *</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="your@email.com"
+          />
+        </div>
+
+        <div className="formGroup">
+          <label>Subject</label>
+          <input
+            type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            placeholder="What is this about?"
+          />
+        </div>
+
+        <div className="formGroup">
+          <label>Message *</label>
+          <textarea
+            name="message"
+            rows={5}
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Write your message here..."
+          />
+        </div>
+
+        <button type="submit" className="submitBtn">
+          Send Message
+        </button>
+
+        {submitted && (
+          <p className="successMessage">
+            ✅ Thank you! We'll get back to you soon.
+          </p>
+        )}
+      </form>
+    </div>
+  );
+}
+
+
 function App() {
+  
   return <> 
   <TopBar/>
   <Search/>
   <About/>
   <ClientTestimonials/>
   <FAQs/>
+  <Contact/>
 
   </>;
   

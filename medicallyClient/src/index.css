@@ -1,6 +1,6 @@
 body{
   height: 100%;
-  width: 99%;
+  width: 99.999%;
   background-color: rgb(255,255, 255);
   color: darkslateblue;
   font-family: Raleway, sans-serif;
@@ -8,13 +8,27 @@ body{
 }
 html, #root {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
-
+a{
+  color: white;
+  text-decoration: none;
+}
+a:hover{
+  color: rgb(11, 168, 11);
+}
 .articleList{
   display: flex;
   transition: transform 0.5s ease;
+}
+
+.authorText{
+   display: flex;
+  justify-content: right;
+  padding-right:30px;
+  margin-top: -20px;
 }
 button {
   border-radius: 20px;
@@ -42,35 +56,58 @@ button {
   position: relative;
 }
 
+.contactDiv{
+  padding: 3rem;
+  margin-left: -10px;
+  width: 100%;
+  margin-top: 50px;
+  background-color: black;
+  color: white
+}
+
+.contactHeader{
+  text-align: center;
+}
+
+.faqText{
+  font-size: x-large;
+}
+
+.faqAnswer{
+  font-size: x-large;
+  margin-left: 1.5%;
+  padding-bottom: 30px;
+}
+
 .header {
   width: auto;
-  margin-top: -10px;
+  /* margin-top: -10px; */
   margin-left: -10px;
-  margin-right: -10px;
+  /* margin-right: 10px; */
   margin-bottom: 40px;
+  width: 100%;
   font-size: 0.3in;
   color: white;
   height: 80px;
 }
 
-a{
-  color: white;
-  text-decoration: none;
-}
-a:hover{
-  color: rgb(11, 168, 11);
-}
+
 .navbar {
   display: flex;
   align-items: center;       /* vertical centering */
   justify-content: space-between;
-  padding: 0 40px;
-  height: 100%;
-  background: rgb(3, 5, 89);  
+  background: rgb(0, 0, 6);  
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100 ;
 }
 .logo{
   font-size: xxx-large ;
   padding-left: 60px;
+}
+.links{
+  margin-right: 10px;
 }
 .nav-links {
   display: flex;
@@ -86,7 +123,7 @@ a:hover{
 
 
 h1{
-  color: rgb(147, 18, 87)
+  color: rgb(5, 5, 5)
 }
 
 
@@ -119,7 +156,7 @@ input{
 }
 
 .TreatmentText{
-  font-size: xx-large;
+  font-size:1.7em;
 }
 
 .aboutText{
@@ -131,9 +168,55 @@ img{
   width: 300px;
 }
 
-p,span{
+span{
   display: flex;
   justify-content: right;
   padding-right:30px;
   margin-top: -20px;
+}
+
+
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #139631;
+}
+
+.submitBtn {
+  padding: 0.9rem;
+  background-color: #035323;
+  color: white;
+  border-radius: 20px;
+  width: 250px;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: #005fcc;
+}
+
+.successMessage {
+  margin-top: 1rem;
+  color: green;
 }
