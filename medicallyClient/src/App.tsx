@@ -5,25 +5,56 @@ import {
     // Pin,
     // InfoWindow
 } from '@vis.gl/react-google-maps'
-import { useState, useRef, useEffect} from 'react';
+import { useState, useRef, useEffect, use} from 'react';
 
+interface mapsProps{
+  treatment: string;
+}
 // Done with the map design for now, back to the frontend interface itself/ [12/02/26].
-function Intro(){
+function Intro({treatment}: mapsProps){
     const position = { lat: 9.072, lng: 7.491};
 
     return(
         <APIProvider apiKey= "AIzaSyBAsK-rpRGClF9XrdK8wyadzI-o-UKZ5CI">
-          <div style={{ height: "100vh", width: "100vw" }}> 
+          <div style={{ height: "100vh", width: "100vw",position: "relative"}}> 
+          
             <Map mapId={"cac5666d3af318eaf31e234b"} defaultZoom={10}
-      defaultCenter={position} style={{ height: "100%", width: "100%" }}  >
+      defaultCenter={position}  style={{ height: "100%", width: "100%"}}  >
+              
               <AdvancedMarker position={position}>
-            <div style={{ color: "Darkblue", fontSize: 100, bottom: 10}}> Chemotheraphy is offered at Belam</div>
 
               </AdvancedMarker>
               
+         
             </Map>
+
+           < div style={{
+                                      position: "relative",
+                                      width: "70%",
+                                      background: "white",
+                                      opacity: 0.94,
+                                      padding: "20px",
+                                      zIndex: 2,
+                                      marginTop: "-13%",
+                                      marginLeft: "10%",
+                                      borderTopLeftRadius: "20px",
+                                      borderTopRightRadius: "20px",
+                                      boxShadow: "0 -4px 20px rgba(0,0,0,0.2)"
+                                      }}>
+<h1><strong style={{color: "green"}}>{treatment}</strong> treatment is available at Belam Medicals</h1>
+
+
+<button style={{width: "205px", padding: "12px", background: "black", color: "white",  border: "none", textAlign: "left", borderRadius: "8px"}} onClick={() => {
+  alert("Payment received!")
+}}>
+Book & Pay
+</button>
+                      </div>
+            
           </div>
           </APIProvider>
+          
+          
     )
 }
 
@@ -59,8 +90,39 @@ function About(){
 }
 
 function Search(){
-  const [clicked, setClicked] = useState(false)
   const [showH1, setShowH1] = useState(true)
+
+  const [formData, setformData] = useState({
+    result : ""
+  })
+
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
+      if(true){
+        setformData({
+        ...formData, 
+        [e.target.name]: e.target.value
+      });
+      if (submitted === true){
+        setSubmitted(false)
+      }
+      }
+  };
+
+   const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.result){
+      alert("Search for a treatment")
+    }
+    else{
+      setSubmitted(true);
+    }
+  };
+
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -68,17 +130,20 @@ function Search(){
     }, 4500);
     return () => clearTimeout(timer)
 }, [])
+
+
   return(
     <>
     <h1 style={{color: "green"}} > { showH1 ? "Get your medical treatment(s) at a discounted rate today!" : null }</h1>
-    <form>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="searchbar" className='TreatmentText'><strong>What treatment are we looking for today?</strong> </label>
-      <input type="text" id="searchbar" onKeyPress={(e) => {
-        if (e.key === "Enter"){
-          setClicked(true)
-        }
-        }}></input>  
-    </form>    <h1> How to use: </h1>
+      <input type="text"  
+      name="result" 
+      value={formData.result}
+      onChange={handleChange}
+        ></input>  
+    </form>    
+    <h1> How to use: </h1>
     <ul>
           <li className='TreatmentText'>Open live location </li>
           <li className='TreatmentText'>Search for particular treatment </li>
@@ -86,8 +151,8 @@ function Search(){
     </ul>
 
       {/* <button type="submit" onClick={() => setClicked(true)}>Open maps</button> */}
-      {console.log(clicked)}
-      {clicked === true && <Intro/>}
+
+      {submitted === true && <Intro treatment= {formData.result} />}
     </>
   )
 }
