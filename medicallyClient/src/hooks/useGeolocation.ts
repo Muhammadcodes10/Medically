@@ -9,8 +9,8 @@ interface Location {
 
 function useGeolocation() {
   const [location, setLocation] = useState<Location>({
-    lat: 29.233,
-    lng: 33.22
+    lat: null,
+    lng: null
   });
 
   const [error, setError] = useState<string | null>(null);

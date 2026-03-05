@@ -4,7 +4,6 @@ import About from "./components/about";
 import ClientTestimonials from "./components/clientTestimonials";
 import FAQs from "./components/faqs";
 import Contact from "./components/contacts";
-import Check from "./components/location";
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
       <About />
       <ClientTestimonials />
       <FAQs />
-    <Check/>
     
 
       <Contact />

@@ -39,6 +39,7 @@ function Search() {
     }, 4500);
     return () => clearTimeout(timer);
   }, []);
+  
 
   return (
     <>

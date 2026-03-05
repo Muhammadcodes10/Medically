@@ -1,7 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from "cors";
 const app: express.Application = express();
 const port: number = 3000;
+app.use(cors())
 
 // Hospital backend system
 mongoose.connect("mongodb://localhost:27017/");
@@ -54,6 +56,10 @@ function findTreatment(location: number[], treatment: string): Promise<string | 
           best = d;
           key = i
         }
+      }
+
+      if (results.length === 0){
+        return ("At the moment, none of the hospitals offer such treatment")
       }
 
       return results[key].hospital; 

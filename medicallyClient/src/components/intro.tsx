@@ -7,31 +7,46 @@ import {
 } from "@vis.gl/react-google-maps";
 import { useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
-
+import { checkTreatment } from "../apis/api";
 interface mapsProps {
   treatment: string;
 }
 // Done with the map design for now, back to the frontend interface itself/ [12/02/26].
 function Intro({ treatment }: mapsProps) {
-     const [Orderselected, setOrderselected] = useState(false);
+  const [Orderselected, setOrderselected] = useState(false);
   const [paymentClicked, setPaymentClicked] = useState(false);
   const [selectedTreatmentDay, setSelectedTreatmentDay] = useState("immediate");
   const [paymentMethod, setPaymentMethod] = useState("");
-
   const { location, loading, error } = useGeolocation();
+
   if (loading) return <div>Getting your location...</div>;
   if (error) return <div>{error}</div>;
   const position = { lat: location.lat, lng: location.lng };
   console.log(
-    "Position is working from intro: " + position.lat + " lng: " + position.lng,
+    "The position just before we sent it to the server is: " +
+      [position.lat, position.lng] +
+      " and the type of the treatment is: " +
+      treatment,
   );
- 
+
+  const handleSearch = async () => {
+    try {
+      const result = await checkTreatment(position, treatment);
+      console.log(result.nearestHospital);
+    } catch (err) {
+     console.log("Handlecheck has an error")
+      console.error(err);
+    }
+  };
+
+let name = handleSearch()
+
   return (
     <APIProvider apiKey="AIzaSyBAsK-rpRGClF9XrdK8wyadzI-o-UKZ5CI">
       <div style={{ height: "100vh", width: "100vw", position: "relative" }}>
         <Map
           mapId={"cac5666d3af318eaf31e234b"}
-          defaultZoom={10}
+          defaultZoom={14}
           defaultCenter={position}
           style={{ height: "100%", width: "100%" }}
         >
@@ -58,7 +73,7 @@ function Intro({ treatment }: mapsProps) {
           >
             <h1>
               <strong style={{ color: "green" }}>{treatment}</strong> treatment
-              is available at Belam Medicals, 14km away.
+              is available at Belam, 14km away.
             </h1>
             <h3>
               Background: Belam Medicals is a medical center located in Abuja
