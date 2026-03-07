@@ -39,7 +39,7 @@ function Intro({ treatment }: mapsProps) {
     }
   };
 
-let name = handleSearch()
+  handleSearch()
 
   return (
     <APIProvider apiKey="AIzaSyBAsK-rpRGClF9XrdK8wyadzI-o-UKZ5CI">
