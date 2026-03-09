@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react";
 
 interface Location {
-  lat: number | null;
-  lng: number  | null;
+  lat: number ;  //This was lat : number | null
+  lng: number ; // This was lng : number | null
 }
 
 function useGeolocation() {
   const [location, setLocation] = useState<Location>({
-    lat: null,
-    lng: null
+    lat: 0, // This was lat : null
+    lng: 0  //This was lng : null
   });
 
   const [error, setError] = useState<string | null>(null);
