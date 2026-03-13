@@ -1,4 +1,4 @@
-import { GoogleMap, DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
+import "@react-google-maps/api";
 import {
   APIProvider,
   Map,
@@ -15,11 +15,6 @@ interface mapsProps {
   treatment: string;
 }
 
-
-
-
-
-
 // Done with the map design for now, back to the frontend interface itself/ [12/02/26].
 function Intro({ treatment }: mapsProps) {
   const [Orderselected, setOrderselected] = useState(false);
@@ -29,7 +24,35 @@ function Intro({ treatment }: mapsProps) {
   const [hospitalName, setHospitalName] = useState();
   const { location, loading, error } = useGeolocation();
   const position = { lat: location.lat, lng: location.lng };
+  function Directions() {
+    const map = useMap();
+    const routesLibrary = useMapsLibrary("routes");
+    const [directionsService, setDirectionsService] =
+      useState<google.maps.DirectionsService>();
+    const [directionsRenderer, setDirectionsRenderer] =
+      useState<google.maps.DirectionsRenderer>();
 
+    useEffect(() => {
+      if (!routesLibrary || !map) return;
+
+      setDirectionsService(new routesLibrary.DirectionsService());
+      setDirectionsRenderer(new routesLibrary.DirectionsRenderer({ map }));
+    }, [routesLibrary, map]);
+
+    useEffect(() => {
+      if (!directionsService || !directionsRenderer) return;
+      if (hospitalName !== undefined)
+        directionsService
+          .route({
+            origin: { lat: 9.06, lng: 7.4899 },
+            destination: { lat: hospitalName[1], lng: hospitalName[2] },
+            travelMode: google.maps.TravelMode.DRIVING,
+          })
+          .then((response) => directionsRenderer.setDirections(response));
+    }, [directionsService, directionsRenderer]);
+
+    return null;
+  }
   useEffect(() => {
     async function handleCheck() {
       try {
@@ -44,30 +67,27 @@ function Intro({ treatment }: mapsProps) {
     handleCheck();
   }, []);
 
-  console.log(hospitalName);
   if (loading) return <div>Getting your location...</div>;
   if (error) return <div>{error}</div>;
-  console.log(position);
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
-  console.log(apiKey);
   return (
     <APIProvider apiKey={apiKey}>
       <div style={{ height: "100vh", width: "100vw", position: "relative" }}>
         <Map
           mapId={import.meta.env.VITE_GOOGLE_MAPS_ID}
-          defaultZoom={14}
-          defaultCenter={position}
+          defaultZoom={4}
+          defaultCenter={{ lat: 9.06, lng: 7.4899 }}
           fullscreenControl={false}
-          streetViewControl = {false}
-          zoomControl = {false}
+          streetViewControl={false}
+          zoomControl={false}
           style={{ height: "100%", width: "100%" }}
         >
-          < Directions />
+          <Directions />
           <AdvancedMarker
             position={{ lat: location.lat, lng: location.lng }}
           ></AdvancedMarker>
           <AdvancedMarker
-            position={{ lat: 35.333, lng: 33.9985 }}
+            position={{ lat: 9.06, lng: 7.4899 }}
           ></AdvancedMarker>
         </Map>
 
@@ -93,10 +113,10 @@ function Intro({ treatment }: mapsProps) {
                 treatment is not available anywhere at the moment.
               </h1>
             )}
-            {hospitalName !== null && (
+            {hospitalName !== null && hospitalName !== undefined && (
               <h1>
                 <strong style={{ color: "green" }}>{treatment}</strong>{" "}
-                treatment is available at {hospitalName}
+                treatment is available at {hospitalName[0]}
               </h1>
             )}
             <h3>
@@ -294,32 +314,5 @@ function Intro({ treatment }: mapsProps) {
     </APIProvider>
   );
 }
-function Directions(){
-  const map = useMap();
-  const routesLibrary = useMapsLibrary("routes");
-  const [directionsService, setDirectionsService] =
-  useState<google.maps.DirectionsService >();
-  const [directionsRenderer,setDirectionsRenderer] = useState<google.maps.DirectionsRenderer >();
 
-  useEffect(() => {
-    if(!routesLibrary || !map) return;
-
-    setDirectionsService(new routesLibrary.DirectionsService())
-    setDirectionsRenderer(new routesLibrary.DirectionsRenderer({map}))
-  }, [routesLibrary, map])
-
-  useEffect(() => {
-    if( !directionsService || !directionsRenderer) return
-    directionsService.route({
-      origin: {lat: 35.143576 , lng: 33.9158437},
-      destination: {lat: 35.333, lng: 33.9985},
-      travelMode: google.maps.TravelMode.DRIVING,
-
-    }).then((response) =>
-      directionsRenderer.setDirections(response)
-    )
-}, [directionsService, directionsRenderer])
-
-return null;
-}
 export default Intro;
