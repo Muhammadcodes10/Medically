@@ -66,7 +66,9 @@ function Intro({ treatment }: mapsProps) {
 
     handleCheck();
   }, []);
-
+console.log(
+  "i"
+)
   if (loading) return <div>Getting your location...</div>;
   if (error) return <div>{error}</div>;
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
