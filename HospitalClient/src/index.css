@@ -1,0 +1,121 @@
+*{
+  
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+
+body{
+  display: flex;
+  align-items:start;
+  justify-content: center;
+  min-height:100vh;
+}
+
+.container{
+  max-width: 600px;
+  margin: 10rem auto;
+  border-radius: 0.5rem;
+  padding: 4rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+
+.social-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid rgb(180, 176, 176);
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 2rem;
+  font-size: larger;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.login-text-wrapper{
+  margin: 0 0;
+  font-size: larger;
+  text-align: center;
+}
+ .login-text{
+  color: green;
+  font-weight: 600;
+  
+}
+
+.login-details-text{
+  color: black;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.login-form{
+  margin: 0 0;
+}
+
+.seperator{
+  margin: 2rem 0;
+  text-align: center;
+  position: relative;
+
+}
+.seperator span{
+  z-index: 1;
+  position: relative;
+  padding: 0 0.9rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background: #fff
+}
+.seperator::after{
+  position: absolute;
+  content: "";
+  left: 0;
+  background: #e8e4e4;
+  height: 1px;
+  width: 100%;
+  top: 50%;
+}
+
+.input-field{
+  height: 100%;
+  font-weight: 500;
+  font-size: x-large;
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border-radius: 0.9rem;
+}
+
+.input-wrapper{
+  padding: 0.5rem 0;
+}
+.input-wrapper label{
+  font-weight: 700;
+  font-size: x-large;
+}
+.login-button{
+  width: 100%;
+  border-radius: 2rem;
+  font-size: larger;
+  padding: 1.5rem;
+  margin-top: 4rem;
+  border: none;
+  background-color:midnightblue;
+  color: white;
+  cursor: pointer;
+}
+.signup-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: larger;
+  margin: 1rem 0;
+}
