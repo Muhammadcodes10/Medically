@@ -1,5 +1,4 @@
 function Intro() {
-  let hospital = "Belam Medicals";
   return (
     <>
       <div className="container">
@@ -16,7 +15,7 @@ function Intro() {
             <label> Email or Username</label>
             <input
               type="email"
-              placeholder="Johndoe@gmail.com"
+              placeholder="Sample@gmail.com"
               className="input-field"
               required
             />
@@ -25,7 +24,7 @@ function Intro() {
             <label> Password</label>
             <input
               type="password"
-              placeholder="Not 1-9!"
+              placeholder="password"
               className="input-field"
               required
             />
@@ -41,16 +40,14 @@ function Intro() {
         <p className="seperator">
           <span>or</span>
         </p>
-        <div className="social-login">
           <button className="social-button">
             <img src="Google.svg" /> {/**Fill it up  */}
             continue with google
           </button>
-        </div>
 
-        <p className="signup-text">
+        <p className="signup-wrapper">
           {" "}
-          Don't have an account? <a href="#">Signup</a>
+          Don't have an account? <a href="#" className="signup-text">Signup</a>
         </p>
       </div>
     </>
