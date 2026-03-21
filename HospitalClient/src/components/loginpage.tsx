@@ -13,7 +13,11 @@ function Intro() {
             <p className="login-details-text">Enter your login details below</p>
         </div>
 
-        <form className="login-form">
+        <form className="login-form" onSubmit={(e)=>{
+          e.preventDefault();
+        }}>
+
+          
           <LoginField text={"Enter email or username"}type={"email"} placeholder={"Sample@gmail.com"} icon={"mail"}/>
           <LoginField  text={"password"}type={"password"} placeholder={"Not 1-9"} icon={"lock"}/>
           <a href="http://google.com" className="forgot-password">
