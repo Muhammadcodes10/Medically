@@ -94,13 +94,20 @@ body{
   font-weight: 500;
   font-size: x-large;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 3rem;
   margin: 0.5rem 0;
   border-radius: 1.3rem;
-  border: 1px solid rgb(180, 176, 176);
+  border: 1px solid #bfb3f2;
 }
 
+.input-field:focus{
+  border: 2px solid brown;;
+}
+.input-field::placeholder{
+  color: #a395e0
+}
 .input-wrapper{
+  position: relative;
   padding: 0.5rem 0;
 }
 .input-wrapper label{
@@ -143,4 +150,30 @@ body{
 
 .forgot-password{
   font-size: larger;
+}
+
+a{
+  text-decoration: none;
+}
+
+.input-wrapper i {
+  color: #a395e0;
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  transition: 0.2s ease;
+}
+
+.login-form .input-wrapper i.eye-icon{
+  cursor: pointer;
+  right: 1rem;
+  display: none;
+}
+
+.input-field:valid ~ i.eye-icon{
+  display: block;
+}
+.login-form .input-wrapper i:not(.eye-icon){
+  left: 1rem;
+  pointer-events: none;
 }

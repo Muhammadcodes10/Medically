@@ -1,3 +1,6 @@
+import LoginField from "./loginField";
+import SocialLogin from "./socialLogin";
+
 function Intro() {
   return (
     <>
@@ -11,24 +14,8 @@ function Intro() {
         </div>
 
         <form className="login-form">
-          <div className="input-wrapper">
-            <label> Email or Username</label>
-            <input
-              type="email"
-              placeholder="Sample@gmail.com"
-              className="input-field"
-              required
-            />
-          </div>
-          <div className="input-wrapper">
-            <label> Password</label>
-            <input
-              type="password"
-              placeholder="password"
-              className="input-field"
-              required
-            />
-          </div>
+          <LoginField text={"Enter email or username"}type={"email"} placeholder={"Sample@gmail.com"} icon={"mail"}/>
+          <LoginField  text={"password"}type={"password"} placeholder={"Not 1-9"} icon={"lock"}/>
           <a href="http://google.com" className="forgot-password">
             {" "}
             Forgot password?{" "}
@@ -40,11 +27,7 @@ function Intro() {
         <p className="seperator">
           <span>or</span>
         </p>
-          <button className="social-button">
-            <img src="Google.svg" /> {/**Fill it up  */}
-            continue with google
-          </button>
-
+          <SocialLogin/>
         <p className="signup-wrapper">
           {" "}
           Don't have an account? <a href="#" className="signup-text">Signup</a>
