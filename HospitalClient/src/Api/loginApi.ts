@@ -1,5 +1,5 @@
 export async function checkLogin(email: string, password: string) {
-  const response = await fetch("http://localhost:3000/check", {
+await fetch("http://localhost:3000/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -9,10 +9,4 @@ export async function checkLogin(email: string, password: string) {
       password: password
     })
   });
-
-  if (!response.ok) {
-    throw new Error("Failed to send user login information");
-  }
-
-  return response.json();
 }

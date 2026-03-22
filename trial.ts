@@ -129,12 +129,15 @@ app.post('/check', (req,res) => {
 
 
  app.post('/signup',  async (req,res) => {
+  const data = req.body
+  console.log(data)
   const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash("12345", saltRounds)
+  const hashedPassword = await bcrypt.hash(data.password, saltRounds)
   const human = new user({
-    email: "Sample@gmail.com",
+    email: data.email,
     password: hashedPassword
   });
+
 
   human.save()
   .then(() => console.log("User created"))

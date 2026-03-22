@@ -1,22 +1,21 @@
+import { checkLogin } from "../Api/loginApi";
 import LoginField from "./loginField";
 import SocialLogin from "./socialLogin";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Intro() {
   const [form, setform] = useState({ email: "", password: "" });
-  useEffect(() => {
-    async function handleCheck() {
-      try {
-        // const result = await checkTreatment(position, treatment);
-        // setHospitalName(result.nearestHospital);
-      } catch (err) {
-        console.log("Handlecheck has an error");
-        console.error(err);
-      }
-    }
 
-    handleCheck();
-  }, []);
+  async function handleCheck() {
+    try {
+      await checkLogin(form.email, form.password);
+      console.log("Handlecheck worked");
+    } catch (err) {
+      console.log("Handlecheck has an error");
+      console.error(err);
+    }
+  }
+
   return (
     <>
       <div className="container">
@@ -30,6 +29,7 @@ function Intro() {
           className="login-form"
           onSubmit={(e) => {
             e.preventDefault();
+            handleCheck();
           }}
         >
           <LoginField
