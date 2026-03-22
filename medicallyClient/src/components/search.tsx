@@ -17,7 +17,7 @@ function Search() {
         ...formData,
         [e.target.name]: e.target.value,
       });
-      if (submitted === true) {
+      if (submitted === true){
         setSubmitted(false);
       }
     }

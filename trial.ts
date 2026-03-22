@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from "cors";
+import bcrypt from "bcrypt"
 const app: express.Application = express();
 const port: number = 3000;
 app.use(cors())
@@ -8,7 +9,7 @@ app.use(cors())
 // Hospital backend system
 mongoose.connect("mongodb://localhost:27017/");
 
-// I have learnt that the Schema is resposible for controlling what goes into the Database from the backend
+// I have learnt that the Sche~ma is resposible for controlling what goes into the Database from the backend
 app.use(express.json())
 const OperationSchema = new mongoose.Schema({
     type: String,
@@ -16,9 +17,17 @@ const OperationSchema = new mongoose.Schema({
     lat: Number,
     lon: Number
 });
+
+// For registring hospitals
+const UserSchema = new mongoose.Schema({
+  email: String,
+  password: String
+})
+
+
 // The model creates a copy of the Schema in a way that allows the instances to be made
 const operation = mongoose.model('Operation', OperationSchema);
-
+const user = mongoose.model('User',UserSchema )
 // The information below represents data from hospitals that will be provided to us via an API or manual database entry
 // An instance of the user model
 // const treatment = new operation({
@@ -34,7 +43,7 @@ const operation = mongoose.model('Operation', OperationSchema);
 
 
 // User backend system
-function findTreatment(location: number[], treatment: string): Promise<string | null | undefined> {
+function findTreatment(location: number[], treatment: string):Promise<string[] | (string | number | null | undefined)[] | null | undefined> {
   const userLat = location[0];
   const userLon = location[1];
 
@@ -59,10 +68,11 @@ function findTreatment(location: number[], treatment: string): Promise<string | 
       }
 
       if (results.length === 0){
-        return ("At the moment, none of the hospitals offer such treatment")
+        return (null)
       }
 
-      return results[key].hospital; 
+
+      return [results[key].hospital, results[key].lat, results[key].lon]; 
     });
 }
 
@@ -99,13 +109,37 @@ app.post('/check', (req,res) => {
     const location = [data.lat, data.lon]
     findTreatment(location, data.type) // This function is structured in a manner that expects asynchronization.
     .then((nearest) => {
-      res.json({ nearestHospital: nearest});
+      console.log('The value returned at nearest is: '+nearest)
+      if(nearest !== null && nearest !== undefined){
+      res.json({ nearestHospital: nearest });
+      }
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });
  })
 
+ app.post('/checkLogin', (req,res) => {
+  //incomplete.
+    const data = req.body;
+    const email = data.email;
+    const password = data.password;
+    
+ })
+
+
+ app.post('/signup',  async (req,res) => {
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash("12345", saltRounds)
+  const human = new user({
+    email: "Sample@gmail.com",
+    password: hashedPassword
+  });
+
+  human.save()
+  .then(() => console.log("User created"))
+  .catch((err) => console.error("Error: ", err))
+ })
  app.post('/updateData', (req,res) => {
     const data = req.body;
     const treatment = new operation({

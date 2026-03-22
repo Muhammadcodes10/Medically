@@ -1,0 +1,4 @@
+My project is in 3 parts: Patient, Hospital, and third party integrations.
+
+I am done with the Patient. I have the UI developed but but but but they are not linked with the Hospital part 
+and the payment systems were not integrated.

@@ -4,11 +4,11 @@ interface props {
   type: string;
   placeholder: string;
   icon: string;
+  form: any,
+  setForm: any
 }
 
-const LoginField = ({ text, type, placeholder, icon }: props) => {
-  const [form, setform] = useState({email: "", password: ""})
-  console.log(form)
+const LoginField = ({ text, type, placeholder, icon, form, setForm }: props) => {
   const [isPasswordShown, setISPasswordShown] = useState(false);
   return (
       <div className="input-wrapper">
@@ -16,9 +16,9 @@ const LoginField = ({ text, type, placeholder, icon }: props) => {
         <input
           name= {type}
           onChange={(e) => {
-            setform({
+            setForm({
               ...form,
-              [e.target.name]: [e.target.value]
+              [e.target.name]: e.target.value
             })
           }}
           type={isPasswordShown ? "text" : type}

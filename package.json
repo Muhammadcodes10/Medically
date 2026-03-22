@@ -1,86 +1,95 @@
 {
- 
+ 
   "name": "medically",
- 
+ 
   "version": "1.0.0",
- 
+ 
   "description": "🩺❤️I am developing a software that helps people locate medical care with precision, instead of guessing around. The healh industry, albeit important, has very little software adoption.",
- 
+ 
   "main": "trial.ts",
- 
+ 
   "scripts": {
- 
-   
+ 
+   
   "test": "echo \"Error: no test specified\" && exit 1",
- 
-   
+ 
+   
   "start": "nodemon trial.ts",
- 
-   
+ 
+   
   "build": "tsc"
- 
+ 
   },
- 
+ 
   "repository": {
- 
-   
+ 
+   
   "type": "git",
- 
-   
+ 
+   
   "url": "git+https://github.com/Muhammadcodes10/Medically.git"
- 
+ 
   },
- 
+ 
   "keywords": [],
- 
+ 
   "author": "",
- 
+ 
   "license": "ISC",
- 
+ 
   "bugs": {
- 
-   
+ 
+   
   "url": "https://github.com/Muhammadcodes10/Medically/issues"
- 
+ 
   },
- 
+ 
   "homepage": "https://github.com/Muhammadcodes10/Medically#readme",
- 
+ 
   "dependencies": {
- 
-   
+ 
+   
+  "bcrypt": "^6.0.0",
+ 
+   
   "cors": "^2.8.6",
- 
-   
+ 
+   
   "express": "^5.2.1",
- 
-   
+ 
+   
   "mongoose": "^9.1.5",
- 
-   
+ 
+   
   "react-credit-cards-2": "^1.2.0"
- 
+ 
   },
- 
+ 
   "devDependencies": {
- 
-   
+ 
+   
+  "@types/bcrypt": "^6.0.0",
+ 
+   
   "@types/cors": "^2.8.19",
- 
-   
+ 
+   
   "@types/express": "^5.0.6",
- 
-   
+ 
+   
+  "@types/google.maps": "^3.58.1",
+ 
+   
   "@types/node": "^25.0.9",
- 
-   
+ 
+   
   "nodemon": "^3.1.11",
- 
-   
+ 
+   
   "ts-node": "^10.9.2",
- 
-   
+ 
+   
   "typescript": "^5.9.3"
- 
+ 
   }
 }

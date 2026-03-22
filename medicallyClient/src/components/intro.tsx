@@ -44,7 +44,7 @@ function Intro({ treatment }: mapsProps) {
       if (hospitalName !== undefined)
         directionsService
           .route({
-            origin: { lat: 9.06, lng: 7.4899 },
+            origin: { lat: 6.6137, lng: 3.3553 },
             destination: { lat: hospitalName[1], lng: hospitalName[2] },
             travelMode: google.maps.TravelMode.DRIVING,
           })
@@ -66,9 +66,7 @@ function Intro({ treatment }: mapsProps) {
 
     handleCheck();
   }, []);
-console.log(
-  "i"
-)
+
   if (loading) return <div>Getting your location...</div>;
   if (error) return <div>{error}</div>;
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
@@ -305,7 +303,9 @@ console.log(
                       cursor: "pointer",
                     }}
                   >
-                    Pay Now
+                    Pay Now 
+                  {/* I will place the ticket after the user clicks the payment button */}
+
                   </button>
                 </div>
               )}
