@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from "cors";
 import bcrypt from "bcrypt"
+import { error } from 'node:console';
 const app: express.Application = express();
 const port: number = 3000;
 app.use(cors())
@@ -119,14 +120,19 @@ app.post('/check', (req,res) => {
     });
  })
 
- app.post('/checkLogin', (req,res) => {
-  //incomplete.
+ app.post('/checkLogin', async(req,res) => {
     const data = req.body;
     const email = data.email;
     const password = data.password;
-    
- })
+    const userFound = await user.findOne({email: email})
+    if (!userFound) return error;
 
+    const isMatch = await bcrypt.compare(password, userFound.password as string)
+    if (!isMatch) console.log("Invalid credentials")
+
+    else if(isMatch) console.log("Logged in.")
+  
+ })
 
  app.post('/signup',  async (req,res) => {
   const data = req.body
