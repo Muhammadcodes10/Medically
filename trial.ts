@@ -2,10 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from "cors";
 import bcrypt from "bcrypt"
+import dotenv from "dotenv"
+import jwt from 'jsonwebtoken'
 import { error } from 'node:console';
 const app: express.Application = express();
 const port: number = 3000;
 app.use(cors())
+dotenv.config()
 
 // Hospital backend system
 mongoose.connect("mongodb://localhost:27017/");
@@ -125,12 +128,22 @@ app.post('/check', (req,res) => {
     const email = data.email;
     const password = data.password;
     const userFound = await user.findOne({email: email})
-    if (!userFound) return error;
+    if (!userFound) throw new Error("User does not exist")
 
     const isMatch = await bcrypt.compare(password, userFound.password as string)
     if (!isMatch) console.log("Invalid credentials")
 
-    else if(isMatch) console.log("Logged in.")
+    else if(isMatch) {
+      console.log("It worked")
+      let jwtsecret = process.env.JWT_SECRET_KEY;
+      let data = {
+        time: Date(),
+        userId: 12
+      }
+      if(!jwtsecret) throw new Error("Jwt missing")
+      const token = jwt.sign(data, jwtsecret)
+      console.log(token)
+    }
   
  })
 
