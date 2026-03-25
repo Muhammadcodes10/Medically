@@ -5,11 +5,13 @@ import { useState } from "react";
 
 function Intro() {
   const [form, setform] = useState({ email: "", password: "" });
+  const [jwt, setJwt] = useState<String>()
 
   async function handleCheck() {
     try {
-      await checkLogin(form.email, form.password);
+      const answer = await checkLogin(form.email, form.password);
       console.log("Handlecheck worked");
+      console.log("The token that was generated is: "+jwt)
     } catch (err) {
       console.log("Handlecheck has an error");
       console.error(err);

@@ -142,7 +142,7 @@ app.post('/check', (req,res) => {
       }
       if(!jwtsecret) throw new Error("Jwt missing")
       const token = jwt.sign(data, jwtsecret)
-      console.log(token)
+      res.json({token})
     }
   
  })

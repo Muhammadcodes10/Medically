@@ -1,5 +1,5 @@
 export async function checkLogin(email: string, password: string) {
-await fetch("http://localhost:3000/checkLogin", {
+const result = await fetch("http://localhost:3000/checkLogin", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -9,4 +9,8 @@ await fetch("http://localhost:3000/checkLogin", {
       password: password
     })
   });
+if (!result) {
+  throw new Error("Not a result")
+}
+return result.json()
 }
