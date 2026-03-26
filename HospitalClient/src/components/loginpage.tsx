@@ -2,16 +2,18 @@ import { checkLogin } from "../Api/loginApi";
 import LoginField from "./loginField";
 import SocialLogin from "./socialLogin";
 import { useState } from "react";
+import TicketScanner from "./homePage";
 
 function Intro() {
   const [form, setform] = useState({ email: "", password: "" });
-  const [jwt, setJwt] = useState<String>()
+  const [jwt, setJwt] = useState<String>();
 
   async function handleCheck() {
     try {
       const answer = await checkLogin(form.email, form.password);
       console.log("Handlecheck worked");
-      console.log("The token that was generated is: "+jwt)
+      setJwt(JSON.stringify(answer));
+      console.log("The token that was generated is: " +jwt);
     } catch (err) {
       console.log("Handlecheck has an error");
       console.error(err);
@@ -70,6 +72,14 @@ function Intro() {
           </a>
         </p>
       </div>
+
+      {console.log(
+  "The flow reaches line 77"
+      )}
+
+      {jwt === typeof(String) && console.log(
+       " Hi baby"
+      )}
     </>
   );
 }
