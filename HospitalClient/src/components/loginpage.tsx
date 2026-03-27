@@ -2,24 +2,29 @@ import { checkLogin } from "../Api/loginApi";
 import LoginField from "./loginField";
 import SocialLogin from "./socialLogin";
 import { useState } from "react";
-import TicketScanner from "./homePage";
+import { useNavigate } from "react-router-dom";
+import homePage from "./homePage";
 
 function Intro() {
   const [form, setform] = useState({ email: "", password: "" });
-  const [jwt, setJwt] = useState<String>();
+  const [jwt, setJwt] = useState("");
 
   async function handleCheck() {
     try {
       const answer = await checkLogin(form.email, form.password);
       console.log("Handlecheck worked");
       setJwt(JSON.stringify(answer));
-      console.log("The token that was generated is: " +jwt);
+      console.log("The token that was generated is: " + jwt);
     } catch (err) {
       console.log("Handlecheck has an error");
       console.error(err);
     }
   }
+  let navig = useNavigate();
 
+  function SomeComponent() {
+    navig("/homePage");
+  }
   return (
     <>
       <div className="container">
@@ -73,13 +78,7 @@ function Intro() {
         </p>
       </div>
 
-      {console.log(
-  "The flow reaches line 77"
-      )}
-
-      {jwt === typeof(String) && console.log(
-       " Hi baby"
-      )}
+      {jwt.length > 0 && SomeComponent()}
     </>
   );
 }
