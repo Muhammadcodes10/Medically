@@ -23,7 +23,7 @@ function Intro() {
   let navig = useNavigate();
 
   function SomeComponent() {
-    navig("/homePage");
+    navig("/homePge");
   }
   return (
     <>

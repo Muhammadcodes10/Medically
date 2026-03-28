@@ -1,17 +1,32 @@
 // This will be the main page of the hospital dashboard.
-import { useNavigate } from "react-router-dom";
-function TicketScanner(){
-//             let navigate = useNavigate();
+function TicketScanner() {
+  return (
+    <>
+      <div className="side-panel">
+        <div className="side-panel-topGroup">
+          <ul>
+            <li>Financial</li>
+            <li>Data</li>
 
+            <li>Patients</li>
 
-//    const handleRT = () => {
-         
-//     navigate('/loginPage')
-        
-//     }
-    return  (
-        <button> Welcome to the dashboard.</button>
-    )
+          </ul>
+        </div>
+        <div className="side-panel-bottomGroup">
+             <ul>
+            <li>FAQS</li>
+            <li>Contact</li>
+
+            <li>Logout</li>
+
+          </ul>
+        </div>
+      </div>
+
+      <div className="leftBox"></div>
+      <div className="rightBox"></div>
+    </>
+  );
 }
 
-export default TicketScanner
+export default TicketScanner;

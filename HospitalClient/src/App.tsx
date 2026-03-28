@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/homePage" element={<TicketScanner/>} />
+        <Route path="/homePge" element={<TicketScanner/>} />
         <Route path="/" element={<Intro/>} />
 
       </Routes>

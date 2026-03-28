@@ -6,9 +6,9 @@
 
 
 body{
-  display: flex;
+  /* display: flex;
   align-items:start;
-  justify-content: center;
+  justify-content: center; */
   font-size: larger;
   min-height:100vh;
 }
@@ -175,4 +175,25 @@ a{
 .login-form .input-wrapper i:not(.eye-icon){
   left: 1rem;
   pointer-events: none;
+}
+
+
+
+.side-panel{
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+  height: 100vh;
+  flex-direction: column;
+  background-color: darkgrey;
+  padding: 0.1rem;
+  
+}
+
+.side-panel-topGroup{
+  color: green;
+}
+
+.side-panel-bottomGroup{
+  color: #a90d27;
 }
