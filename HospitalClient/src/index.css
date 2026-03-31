@@ -207,7 +207,7 @@ a{
   margin-bottom: 1rem;
 }
 
-.material-symbols-rounded{
+.side-panel .material-symbols-rounded{
   font-size: xx-large;
   padding: 0.5rem;
   color: black;
@@ -227,6 +227,23 @@ a{
 }
 
 
+.ticketcontainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticketcontainer button{
+   border-radius: 25px;
+  font-size: xx-large;
+  padding: 1rem;
+  color: rgb(0, 0, 0);
+  background-color: rgb(7, 1, 1);
+  height: 70px;
+  display: flex;
+  gap: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
 .ticket-header{
   font-weight: 700;
   margin-top : 0rem;

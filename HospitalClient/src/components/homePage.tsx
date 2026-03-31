@@ -6,7 +6,7 @@ function TicketScanner() {
         <div className="sidepanel-container">
           <div className="side-panel">
             <div className="side-panel-topGroup">
-               <div>
+              <div>
                 <i className="material-symbols-rounded">qr_code_scanner</i>
               </div>
               <div>
@@ -18,11 +18,8 @@ function TicketScanner() {
               <div>
                 <i className="material-symbols-rounded">group</i>
               </div>
-             
             </div>
             <div className="side-panel-bottomGroup">
-           
-
               <div>
                 <i className="material-symbols-rounded">Settings</i>
               </div>
@@ -33,15 +30,19 @@ function TicketScanner() {
           </div>
         </div>
         <div className="whole-panel">
-          <h1 className="ticket-header">
-            
-                <i className="material-symbols-rounded" >qr_code_scanner</i>
+          <div className="ticketcontainer">
+            <h1 className="ticket-header">
+              <i className="material-symbols-rounded">qr_code_scanner</i>
               Ticket scanner
-            <p className="ticket-subtext">
-              {" "}
-              Scan tickets to verify patient booking
-            </p>
-          </h1>
+              <p className="ticket-subtext">
+                {" "}
+                Scan tickets to verify patient booking
+              </p>
+            </h1>
+            <button><div>
+                <i className="material-symbols-rounded">replay</i>
+              </div> Scan next ticket</button>
+          </div>
           <div className="main-panel">
             <div className="leftBox">
               <div className="leftBox-heading">
@@ -52,11 +53,10 @@ function TicketScanner() {
                 </p>
               </div>
               <div className="leftBox-prompt">
-                <h3>
-                  Scanner paused</h3>
+                <h3>Scanner paused</h3>
                 <div className="leftBox-scannerContainer">
-                <i className="material-symbols-rounded" >qr_code_scanner</i>
-                <p> Upload Ticket Image</p>
+                  <i className="material-symbols-rounded">qr_code_scanner</i>
+                  <p> Upload Ticket Image</p>
                 </div>
               </div>
             </div>
