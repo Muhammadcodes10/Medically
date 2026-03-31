@@ -28,7 +28,7 @@ const LoginField = ({ text, type, placeholder, icon, form, setForm }: props) => 
         />
         <i className="material-symbols-rounded">{icon}</i>
 
-        {type === "password" && (
+        {type === "password" && (<>
           <i
             onClick={() => setISPasswordShown((prevState) => !prevState)}
             className="material-symbols-rounded eye-icon"
@@ -36,6 +36,7 @@ const LoginField = ({ text, type, placeholder, icon, form, setForm }: props) => 
             {" "}
             {isPasswordShown ? "visibility" : "visibility_off"}
           </i>
+    </>
         )}
       </div>
   );

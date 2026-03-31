@@ -1,145 +1,128 @@
-*{
-  
+* {
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
 }
 
-
-body{
-  display: flex;
-  align-items:start;
-  justify-content: center;
+body {
+  margin: 0;                 /* 🔥 remove default spacing */
   font-size: larger;
-  min-height:100vh;
+  min-height: 100vh;
+  overflow-x: hidden;        /* 🔥 stop horizontal scroll */
 }
 
-.container{
+/* ---------------- LOGIN (RENAMED TO AVOID CONFLICT) ---------------- */
+.login-container {
   max-width: 600px;
   margin: 10rem auto;
   border-radius: 5rem;
-  padding: 4rem 4rem;
+  padding: 4rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 
-
-.social-button{
+/* ---------------- DASHBOARD ---------------- */
+.container-homePage {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border: 1px solid rgb(180, 176, 176);
-  gap: 0.5rem;
-  width: 100%;
-  border-radius: 2rem;
-  font-size: larger;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s ease;
+  height: 100vh;
+  width: 100%;              /* 🔥 ensure full width */
 }
 
-.social-button:hover{
-  transform: scale(1.05);
-}
-
-.login-text-wrapper{
-  margin: 0 0;
-  font-size: larger;
-  text-align: center;
-}
- .login-text{
-  color: midnightblue;
-  font-weight: 600;
-  
-}
-
-.login-details-text{
-  color: black;
-  font-size: larger;
-  font-weight: 600;
-}
-
-.login-form{
-  margin: 0 0;
-}
-
-.seperator{
-  margin: 2rem 0;
-  text-align: center;
-  position: relative;
-
-}
-.seperator span{
-  z-index: 1;
-  position: relative;
-  padding: 0 0.9rem;
-  font-size: 1.5rem;
-  font-weight: 500;
-  background: #fff
-}
-.seperator::after{
-  position: absolute;
-  content: "";
-  left: 0;
-  background: #e8e4e4;
-  height: 1px;
-  width: 100%;
-  top: 50%;
-}
-
-.input-field{
+/* Sidebar */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 230px;
   height: 100%;
-  font-weight: 500;
-  font-size: x-large;
-  width: 100%;
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 1.3rem;
-  border: 1px solid rgb(180, 176, 176);
+  padding: 2rem;            /* 🔥 reduced to avoid overflow */
+  border-right: 1px solid #d1d5db;
 }
 
-.input-wrapper{
-  padding: 0.5rem 0;
-}
-.input-wrapper label{
-  font-weight: 700;
-  font-size: x-large;
-}
-.login-button{
-  width: 100%;
-  border-radius: 2rem;
-  font-size: larger;
-  padding: 1.5rem;
-  margin-top: 4rem;
-  border: none;
-  background-color:midnightblue;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.login-button:hover{
-  transform: scale(1.05);
-}
-.signup-wrapper{
+.side-panel-topGroup {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  font-size: larger;
-  margin: 1rem 0;
+  color: green;
 }
 
-.signup-text{
-  color: midnightblue;
+.side-panel-bottomGroup {
+  color: #a90d27;
 }
 
-.signup-text::after{
-  color: yellow
+/* Main wrapper */
+.whole-panel {
+  flex: 1;                  /* 🔥 CRITICAL */
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
 }
 
-.forgot-pasword{
-  font-size: larger;
+/* Header */
+.ticket-header {
+  font-weight: 700;
+  margin: 0;
+}
+
+.ticket-subtext {
+  font-weight: 400;
+  font-size: large;
+  color: #6b7280;
+  margin-top: 0.3rem;
+}
+
+/* Main content */
+.main-panel {
+  display: flex;
+  gap: 2rem;
+  flex: 1;                  /* 🔥 fills remaining height */
+  width: 100%;
+}
+
+/* Boxes */
+.leftBox,
+.rightBox {
+  flex: 1;                  /* 🔥 equal width */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d1d5db;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #fff;
+}
+
+/* Left box */
+.leftBox-heading {
+  margin-left: 1rem;
+}
+
+.leftBox-heading-subtext {
+  color: #6b7280;
+}
+
+.leftBox-prompt {
+  text-align: center;
+  margin-top: auto;         /* 🔥 pushes content down nicely */
+  margin-bottom: auto;
+  color: #6b7280;
+}
+
+/* Right box */
+.rightBox-heading {
+  margin-left: 1rem;
+}
+
+.rightBox-img {
+  display: block;
+  margin: 3rem auto;
+}
+
+.rightBox-prompt {
+  text-align: center;
+  margin: auto;             /* 🔥 perfect centering */
+}
+
+.rightBox-prompt-subtext {
+  color: #6b7280;
 }
