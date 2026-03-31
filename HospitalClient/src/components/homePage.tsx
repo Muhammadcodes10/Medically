@@ -6,22 +6,37 @@ function TicketScanner() {
         <div className="sidepanel-container">
           <div className="side-panel">
             <div className="side-panel-topGroup">
-              <div>F</div>
-              <div>D</div>
-              <div>F</div>
-              <div>D</div>
+               <div>
+                <i className="material-symbols-rounded">qr_code_scanner</i>
+              </div>
+              <div>
+                <i className="material-symbols-rounded">dashboard</i>
+              </div>
+              <div>
+                <i className="material-symbols-rounded">payments</i>
+              </div>
+              <div>
+                <i className="material-symbols-rounded">group</i>
+              </div>
+             
             </div>
             <div className="side-panel-bottomGroup">
-              <div>F</div>
-              <div>D</div>
-              <div>F</div>
-              <div>D</div>
+           
+
+              <div>
+                <i className="material-symbols-rounded">Settings</i>
+              </div>
+              <div>
+                <i className="material-symbols-rounded">Logout</i>
+              </div>
             </div>
           </div>
         </div>
         <div className="whole-panel">
           <h1 className="ticket-header">
-            [x] Ticket scanner
+            
+                <i className="material-symbols-rounded" >qr_code_scanner</i>
+              Ticket scanner
             <p className="ticket-subtext">
               {" "}
               Scan tickets to verify patient booking
@@ -37,8 +52,12 @@ function TicketScanner() {
                 </p>
               </div>
               <div className="leftBox-prompt">
-                <h3>Scanner paused</h3>
-                <p> [x]Upload Ticket Image</p>
+                <h3>
+                  Scanner paused</h3>
+                <div className="leftBox-scannerContainer">
+                <i className="material-symbols-rounded" >qr_code_scanner</i>
+                <p> Upload Ticket Image</p>
+                </div>
               </div>
             </div>
             <div className="rightBox">

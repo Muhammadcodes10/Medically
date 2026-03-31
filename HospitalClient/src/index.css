@@ -183,6 +183,7 @@ a{
 
 .sidepanel-container{
   padding-bottom: 1.45rem;
+  
 }
 
 .side-panel{
@@ -204,6 +205,12 @@ a{
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
+}
+
+.material-symbols-rounded{
+  font-size: xx-large;
+  padding: 0.5rem;
+  color: black;
 }
 
 .whole-panel{
@@ -248,6 +255,11 @@ a{
 
 .leftBox-heading{
   margin-left: 1rem;
+}
+.leftBox-scannerContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .leftBox-heading-subtext{
