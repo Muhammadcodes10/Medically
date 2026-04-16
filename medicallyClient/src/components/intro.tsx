@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 import { checkTreatment } from "../apis/api";
+import { useNavigate } from "react-router-dom";
 interface mapsProps {
   treatment: string;
 }
@@ -21,9 +22,16 @@ function Intro({ treatment }: mapsProps) {
   const [paymentClicked, setPaymentClicked] = useState(false);
   const [selectedTreatmentDay, setSelectedTreatmentDay] = useState("immediate");
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [age, setAge] = useState("");
   const [hospitalName, setHospitalName] = useState();
   const { location, loading, error } = useGeolocation();
   const position = { lat: location.lat, lng: location.lng };
+  let navig = useNavigate(); //
+
+  function generateTicket() {
+  navig("/getTicket", { state: { fullname, age, treatment } });
+}
   function Directions() {
     const map = useMap();
     const routesLibrary = useMapsLibrary("routes");
@@ -41,23 +49,30 @@ function Intro({ treatment }: mapsProps) {
 
     useEffect(() => {
       if (!directionsService || !directionsRenderer) return;
-      if (hospitalName !== undefined)
+      if (hospitalName !== undefined) {
         directionsService
           .route({
             origin: { lat: 6.6137, lng: 3.3553 },
-            destination: { lat: hospitalName[1], lng: hospitalName[2] },
+            destination: { lat: 9.06, lng: 7.4899 },
             travelMode: google.maps.TravelMode.DRIVING,
           })
           .then((response) => directionsRenderer.setDirections(response));
+      }
     }, [directionsService, directionsRenderer]);
 
     return null;
   }
+
   useEffect(() => {
     async function handleCheck() {
       try {
         const result = await checkTreatment(position, treatment);
-        setHospitalName(result.nearestHospital);
+        console.log(
+          "The result from the checkTreatment function is: ",
+          result.nearestHospital[0],
+        );
+        setHospitalName(result.nearestHospital[0]);
+        
       } catch (err) {
         console.log("Handlecheck has an error");
         console.error(err);
@@ -84,7 +99,7 @@ function Intro({ treatment }: mapsProps) {
         >
           <Directions />
           <AdvancedMarker
-            position={{ lat: location.lat, lng: location.lng }}
+            position={{ lat: 9.06, lng: 7.4899 }}
           ></AdvancedMarker>
           <AdvancedMarker
             position={{ lat: 9.06, lng: 7.4899 }}
@@ -164,7 +179,22 @@ function Intro({ treatment }: mapsProps) {
               costs #40,000 at Belam Medicals
             </h1>
             <label> Full name: </label>
-            <input type="text" placeholder="Enter your full name" />
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setFullname(e.target.value);
+              }}
+            />
+
+             <label> Enter age: </label>
+            <input
+              type="text"
+              placeholder="Enter your age"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setAge(e.target.value);
+              }}
+            />
 
             <div>
               <h3>When do you want your treatment?</h3>
@@ -239,6 +269,7 @@ function Intro({ treatment }: mapsProps) {
             </label>
 
             <label style={{ display: "block", marginBottom: "10px" }}>
+                  
               <input
                 className="radioStyles"
                 type="radio"
@@ -249,6 +280,7 @@ function Intro({ treatment }: mapsProps) {
               {paymentMethod === "Cash" && (
                 <div>
                   <button
+                  onClick={() => fullname !== "" && generateTicket()}
                     style={{
                       width: "100%",
                       padding: "12px",
@@ -264,6 +296,7 @@ function Intro({ treatment }: mapsProps) {
                     Finalize order
                   </button>
                 </div>
+                
               )}
               {paymentMethod === "Card" && (
                 <div>
@@ -302,16 +335,20 @@ function Intro({ treatment }: mapsProps) {
                       marginTop: "15px",
                       cursor: "pointer",
                     }}
+                    onClick={() => fullname !== "" && generateTicket()}
                   >
-                    Pay Now 
-                  {/* I will place the ticket after the user clicks the payment button */}
-
+                    Pay Now
+                    {/* I will place the ticket after the user clicks the payment button */}
                   </button>
+       
+
                 </div>
+                
               )}
             </label>
           </div>
         )}
+
       </div>
     </APIProvider>
   );

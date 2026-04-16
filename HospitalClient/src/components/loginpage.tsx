@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import homePage from "./homePage";
 
 function Intro() {
-  const [form, setform] = useState({ email: "", password: "" });
-  const [jwt, setJwt] = useState("");
+  const [form, setform] = useState({ email: "", password: "" }); // A form to collect user email and password.
+  const [jwt, setJwt] = useState(""); // A state variable to store the JSON Web Token (JWT) received after successful login.
 
   async function handleCheck() {
     try {
@@ -20,7 +20,7 @@ function Intro() {
       console.error(err);
     }
   }
-  let navig = useNavigate();
+  let navig = useNavigate(); //
 
   function SomeComponent() {
     navig("/homePge");

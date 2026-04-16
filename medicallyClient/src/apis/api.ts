@@ -14,6 +14,5 @@ export async function checkTreatment(location: { lat: number | null; lng: number
   if (!response.ok) {
     throw new Error("Failed to fetch nearest hospital");
   }
-
   return response.json();
 }

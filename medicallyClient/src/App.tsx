@@ -1,19 +1,15 @@
-import Search from "./components/search";
-import TopBar from "./components/topbar";
-import About from "./components/about";
-import ClientTestimonials from "./components/clientTestimonials";
-import FAQs from "./components/faqs";
-import Contact from "./components/contacts";
+import Compilation from "./components/clientCompilation";
+import GenerateTicket from "./components/ticketGeneration";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 function App() {
   return (
     <>
-      <TopBar />
-      <Search />
-      <About />
-      <ClientTestimonials />
-      <FAQs />
-
-      <Contact />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Compilation/>} />
+        <Route path="/getTicket" element={<GenerateTicket/>} />
+      </Routes>
+    </Router>
     </>
   );
 }

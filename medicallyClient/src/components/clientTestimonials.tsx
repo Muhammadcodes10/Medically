@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Navigate } from "react-router-dom";
 
 function ClientTestimonials() {
   const [index, setIndex] = useState(0);
@@ -11,6 +12,8 @@ function ClientTestimonials() {
           (0 as number)),
     );
   }, []);
+
+  
 
   return (
     <>
