@@ -250,3 +250,132 @@ textarea:focus {
   display: flex;
   flex-direction: column;
 }
+
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 260%;
+  /* background-color: rgb(8, 156, 20); */
+}
+
+.signup-client {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+
+  /* background-color: #aac62e; */
+}
+
+
+.signup-headers {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 10rem;
+}
+
+.signup-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.signup-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.signup-getStarted {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+
+
+.signup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.signup-form-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: xx-large;
+  /* background-color: #ccc; */
+}
+.signup-form-data label {
+  font-weight: bold;
+}
+
+.signup-form-data input {
+  padding: 2.5rem;
+  box-sizing: border-box; /* add this */
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: xx-large;
+}
+
+.DOB-text {
+  margin-bottom: -1rem;
+  font-weight: bold;
+  font-size: xx-large;
+}
+.date-of-birth {
+  display: flex;
+  gap: 1rem;
+}
+
+.date-of-birth select {
+  padding: 1.5rem 2rem;
+  font-size: x-large;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+}
+
+.date-of-birth select:focus {
+  outline: none;
+  border-color: #139631;
+}
+
+.date-of-birth option {
+  padding: 1rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.signup-btn {
+  padding: 2rem;
+  background-color: #0a0353;
+  color: white;
+  border-radius: 20px;
+  border: solid 1px rgb(3, 5, 89);
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  font-size: xx-large;
+  cursor: pointer;
+  width: 100%; /* add this */
+  display: block; /* add this */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.already-has-an-account-btn {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  color: black;
+  border-radius: 20px;
+  font-weight: 700;
+  font-family: "Raleway", sans-serif;
+  border: 1px solid #035323;
+  text-align: center;
+  cursor: pointer;
+  width: 100%; /* add this */
+  display: block;
+}
