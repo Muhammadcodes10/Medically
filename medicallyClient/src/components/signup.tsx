@@ -24,7 +24,6 @@ const years = Array.from(
 );
 
 function Register() {
-  const [isSuccessful, setIsSuccessful] = useState(false);
   const [emailError, setEmailError] = useState(""); // ← new
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
@@ -51,7 +50,6 @@ function Register() {
       form.username,
     )
       .then((response) => {
-        setIsSuccessful(true);
         console.log("Signup successful:", response);
       })
       .catch((error) => {

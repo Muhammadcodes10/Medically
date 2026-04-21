@@ -18,7 +18,6 @@ export async function SignupApi(
   });
 
   if (!response.ok) { 
-    const errorData = await response.json();
     throw new Error( "User already exists");
   }
   if (response.status === 200) {

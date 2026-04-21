@@ -1,20 +1,27 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { error } from "node:console";
-import { create } from "node:domain";
+import nodemailer from "nodemailer";
 const app: express.Application = express();
 const port: number = 3000;
 app.use(cors());
-dotenv.config();
+
+const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 // Hospital backend system
 mongoose.connect("mongodb://localhost:27017/");
 
-// I have learnt that the Sche~ma is resposible for controlling what goes into the Database from the backend
+// I have learnt that the Schema is resposible for controlling what goes into the Database from the backend
 app.use(express.json());
 const OperationSchema = new mongoose.Schema({
   type: String,
@@ -23,22 +30,29 @@ const OperationSchema = new mongoose.Schema({
   lon: Number,
 });
 
-// For registring hospitals
-const UserSchema = new mongoose.Schema({
+// For registring users
+const patientSchema = new mongoose.Schema({
   email: String,
   password: String,
+  name: String,
+  DoB: String,
+  username: String,
+  medHistory: Array,
+  status: String,
+  verificationToken: String,
+  isVerified: { type: Boolean, default: false },
 });
 
 const ticketSchema = new mongoose.Schema({
   ticketId: String,
   date: Date,
   status: String,
-  createdAt: Date
+  createdAt: Date,
 });
 
 // The model creates a copy of the Schema in a way that allows the instances to be made
 const operation = mongoose.model("Operation", OperationSchema);
-const user = mongoose.model("User", UserSchema);
+const patient = mongoose.model("Patient", patientSchema);
 const ticket = mongoose.model("Ticket", ticketSchema);
 
 // Continue from here tomorrrow inshallah.
@@ -132,8 +146,16 @@ app.post("/checkLogin", async (req, res) => {
   const data = req.body;
   const email = data.email;
   const password = data.password;
-  const userFound = await user.findOne({ email: email });
-  if (!userFound) throw new Error("User does not exist");
+  const userFound = await patient.findOne({ email: email });
+  if (!userFound) {
+    res.status(404).json({ message: "User not found" });
+    return;
+  }
+
+  if (userFound.isVerified === false) {
+    res.status(403).json({ message: "Email not verified" });
+    return;
+  }
 
   const isMatch = await bcrypt.compare(password, userFound.password as string);
   if (!isMatch) console.log("Invalid credentials");
@@ -152,19 +174,83 @@ app.post("/checkLogin", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const data = req.body;
-  console.log(data);
+  const existing = await patient.findOne({ email: data.email });
+  if (existing) {
+    res.status(400).json("User already exists");
+    return;
+  }
+
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(data.password, saltRounds);
-  const human = new user({
+  const verificationToken = jwt.sign(
+    { email: data.email },
+    process.env.JWT_SECRET_KEY as string,
+    {
+      expiresIn: "1d",
+    },
+  );
+
+  const human = new patient({
     email: data.email,
     password: hashedPassword,
+    name: data.name,
+    DoB: data.DateoBirth,
+    username: data.username,
+    medHistory: [],
+    status: "New Patient",
+    isVerified: false,
+    verificationToken: verificationToken,
   });
 
   human
     .save()
     .then(() => console.log("User created"))
-    .catch((err) => console.error("Error: ", err));
+    .catch((err: Error) => console.error("Error: ", err));
+
+  res.status(200).json({ message: "User created successfully" });
+ console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASSWORD:", process.env.EMAIL_PASSWORD);
+  const verifyUrl = `http://localhost:3000/verifyEmail?token=${verificationToken}`;
+  await transporter.sendMail({
+    from: "belloalamin23@gmail.com",
+    to: data.email,
+    subject: "Verify your email",
+    html: `
+      <h2>Welcome, ${data.name}!</h2>
+      <p>Click the button below to verify your email.</p>
+      <a href="${verifyUrl}" style="padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+        Verify Email
+      </a>
+      <p>This link expires in 24 hours.</p>
+    `,
+  });
 });
+
+app.get("/verifyEmail", async (req, res) => {
+  const { token } = req.query;
+
+  try {
+    const decoded = jwt.verify(
+      token as string,
+      process.env.JWT_SECRET_KEY!,
+    ) as { email: string };
+
+    const user = await patient.findOneAndUpdate(
+      { email: decoded.email, verificationToken: token },
+      { isVerified: true, verificationToken: null },
+    );
+
+    if (!user) {
+      res.status(400).json({ message: "Invalid or expired token" });
+      return;
+    }
+
+    res.redirect("http://localhost:5173/login");
+  } catch {
+    res.status(400).json({ message: "Invalid or expired token" });
+  }
+});
+
 app.post("/updateData", (req, res) => {
   const data = req.body;
   const treatment = new operation({
