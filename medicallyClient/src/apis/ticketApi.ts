@@ -3,7 +3,6 @@ export async function saveTicket(
   email: string,
   treatment: string,
   date: string,
-  
 ) {
   const response = await fetch("http://localhost:3000/saveTicket", {
     method: "POST",
@@ -14,6 +13,7 @@ export async function saveTicket(
       name,
       email,
       treatment,
+      date
     }),
   });
 

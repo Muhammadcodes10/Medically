@@ -2,7 +2,8 @@ body {
   height: 100%;
   width: 99.999%;
   background-color: rgb(255, 255, 255);
-  color: darkslateblue;
+  /* color: darkslateblue;
+  color */
   font-family: Raleway, sans-serif;
   font-size: larger;
 }
@@ -268,12 +269,11 @@ textarea:focus {
   /* background-color: #aac62e; */
 }
 
-
 .signup-headers {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 10rem;
+  margin-top: 13rem;
 }
 
 .signup-title {
@@ -291,19 +291,16 @@ textarea:focus {
   font-weight: bold;
 }
 
-
-
 .signup-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-
 .signup-form-data {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   font-size: xx-large;
   /* background-color: #ccc; */
 }
@@ -351,7 +348,7 @@ textarea:focus {
 
 .signup-btn {
   padding: 2rem;
-  background-color: #0a0353;
+  background-color: black;
   color: white;
   border-radius: 20px;
   border: solid 1px rgb(3, 5, 89);
@@ -364,8 +361,13 @@ textarea:focus {
   display: block; /* add this */
   margin-top: 2rem;
   margin-bottom: 2rem;
+  transition: transform 0.3s ease; /* add this for smooth scaling */
 }
 
+.signup-btn:hover {
+  color: white;
+  transform: scaleY(1.04)
+}
 .already-has-an-account-btn {
   margin-bottom: 2rem;
   padding: 2rem;
@@ -378,4 +380,9 @@ textarea:focus {
   cursor: pointer;
   width: 100%; /* add this */
   display: block;
+  transition: transform 0.3s ease; /* add this for smooth scaling */
+}
+
+.already-has-an-account-btn:hover {
+  transform: scaleY(1.04);
 }
