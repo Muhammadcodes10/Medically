@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { SignupApi } from "../apis/signupApi";
+import { useNavigate } from "react-router-dom";
+
 const months = [
   "January",
   "February",
@@ -21,6 +24,8 @@ const years = Array.from(
 );
 
 function Register() {
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [emailError, setEmailError] = useState(""); // ← new
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -31,6 +36,37 @@ function Register() {
     DoB: "",
     username: "",
   });
+  const navigate = useNavigate();
+
+  function useRedirect() {
+    navigate("/login");
+  }
+
+  async function sendData() {
+    await SignupApi(
+      form.email,
+      form.password,
+      form.DoB,
+      form.name,
+      form.username,
+    )
+      .then((response) => {
+        setIsSuccessful(true);
+        console.log("Signup successful:", response);
+      })
+      .catch((error) => {
+        if (error.message === "User already exists") {
+          // ← catch it here
+          setEmailError("User already exists.");
+        }
+        console.error("Signup failed:", error);
+      });
+  }
+
+  useEffect(() => {
+    const DoB = `${day} ${month} ${year}`;
+    setForm({ ...form, DoB });
+  }, [day, month, year]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -38,30 +74,52 @@ function Register() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const DoB = `${day} ${month} ${year}`;
-    setForm({ ...form, DoB });
-    console.log(form);
+    sendData();
   }
+
   return (
     <div className="signup-wrapper">
       <div className="signup-client">
         <div className="signup-headers">
           <div className="signup-title">🩺Medico</div>
-          <div className="signup-getStarted"> Get started on Medico</div>
-          <div> Sign up to access the best healthcare has to offer.</div>
+          <div className="signup-getStarted">Get started on Medico</div>
+          <div>Sign up to access the best healthcare has to offer.</div>
         </div>
         <div className="signup-content">
           <form className="signup-form-data" onSubmit={handleSubmit}>
-            <label> Email address</label>
+            <label>Email address</label>
             <input
               type="email"
               name="email"
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e);
+                setEmailError(""); //  clears error when user retypes
+              }}
               placeholder="Sample@email.com"
+              style={{
+                border: emailError ? "2px solid red" : "",
+              }} //  red border
               required
             />
+            {emailError && ( // red message with login link
+              <p
+                style={{
+                  color: "red",
+                  margin: "0.3rem -0.8rem 0rem 0.4rem",
+                  fontSize: "0.8em",
+                }}
+              >
+                {emailError}{" "}
+                <span
+                  onClick={() => useRedirect()}
+                  style={{ textDecoration: "underline", cursor: "pointer" }}
+                >
+                  Log in instead.
+                </span>
+              </p>
+            )}
 
-            <label> Password</label>
+            <label>Password</label>
             <input
               type="password"
               name="password"
@@ -70,7 +128,7 @@ function Register() {
               required
             />
 
-            <label className="DOB-text"> Date of Birth </label>
+            <label className="DOB-text">Date of Birth</label>
             <div className="date-of-birth">
               <select value={day} onChange={(e) => setDay(e.target.value)}>
                 {days.map((d) => (
@@ -95,7 +153,7 @@ function Register() {
               </select>
             </div>
 
-            <label> Name</label>
+            <label>Name</label>
             <input
               name="name"
               onChange={handleChange}
@@ -104,7 +162,7 @@ function Register() {
               required
             />
 
-            <label> Username</label>
+            <label>Username</label>
             <input
               name="username"
               onChange={handleChange}
@@ -114,14 +172,15 @@ function Register() {
             />
 
             <button className="signup-btn" type="submit">
-              {" "}
               Sign Up
             </button>
           </form>
 
-          <button className="already-has-an-account-btn" type="submit">
-            {" "}
-            Already have an account?{" "}
+          <button
+            className="already-has-an-account-btn"
+            onClick={() => navigate("/login")} // ← fixed this too
+          >
+            Already have an account?
           </button>
         </div>
       </div>

@@ -1,4 +1,4 @@
-export async function signup(
+export async function SignupApi(
   email: string,
   password: string,
   DoB: string,
@@ -17,9 +17,11 @@ export async function signup(
     }),
   });
 
-  if (!response.ok) {
-    throw new Error("Failed");
+  if (!response.ok) { 
+    const errorData = await response.json();
+    throw new Error( "User already exists");
   }
-
-  return response.json();
+  if (response.status === 200) {
+    return await response.json();
+  }
 }
