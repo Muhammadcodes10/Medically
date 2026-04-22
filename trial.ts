@@ -6,9 +6,14 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
+
+// The above are import statements.
+
 const app: express.Application = express();
 const port: number = 3000;
 app.use(cors());
+
+// The above is the initialization of express and port numbers.
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -17,6 +22,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
 });
+
+// The above is the intialization of nodemailer transporter, which is used to send emails to users.
 
 // Hospital backend system
 mongoose.connect("mongodb://localhost:27017/");
@@ -122,10 +129,18 @@ function distance(
 
   return R * c; // distance in kilometers
 }
+
+app.get("", (req, res) => {
+  res.send("Hi from the newest route.");
+});
 app.get("/home", (req, res) => {
-  res.send("Everyone deserves access to Healthcare.");
+  res.send("Hi from the home.");
 });
 
+app.post("/tester", (req, res) => {
+  const data = req.body;
+  res.send(data);
+});
 // The main route for users to actually check for treatment
 app.post("/check", (req, res) => {
   console.log("BODY:", req.body);
@@ -144,23 +159,24 @@ app.post("/check", (req, res) => {
 
 app.post("/checkLogin", async (req, res) => {
   const data = req.body;
-  const email = data.email;
+  console.log(data);
+  const username = data.username;
   const password = data.password;
-  const userFound = await patient.findOne({ email: email });
+  const userFound = await patient.findOne({ username });
+  console.log("User found: ", userFound);
   if (!userFound) {
     res.status(404).json({ message: "User not found" });
     return;
   }
 
   if (userFound.isVerified === false) {
-    res.status(403).json({ message: "Email not verified" });
+    res.status(403).json({ message: "user not verified" });
     return;
   }
 
   const isMatch = await bcrypt.compare(password, userFound.password as string);
   if (!isMatch) console.log("Invalid credentials");
   else if (isMatch) {
-    console.log("It worked");
     let jwtsecret = process.env.JWT_SECRET_KEY;
     let data = {
       time: Date(),
@@ -174,6 +190,7 @@ app.post("/checkLogin", async (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const data = req.body;
+  console.log("User came through");
   const existing = await patient.findOne({ email: data.email });
   if (existing) {
     res.status(400).json("User already exists");
@@ -208,17 +225,15 @@ app.post("/signup", async (req, res) => {
     .catch((err: Error) => console.error("Error: ", err));
 
   res.status(200).json({ message: "User created successfully" });
- console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASSWORD:", process.env.EMAIL_PASSWORD);
   const verifyUrl = `http://localhost:3000/verifyEmail?token=${verificationToken}`;
   await transporter.sendMail({
-    from: "belloalamin23@gmail.com",
+    from: process.env.EMAIL_USER,
     to: data.email,
     subject: "Verify your email",
     html: `
       <h2>Welcome, ${data.name}!</h2>
       <p>Click the button below to verify your email.</p>
-      <a href="${verifyUrl}" style="padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+      <a href="${verifyUrl}" style="padding: 10px 20px; background: #4CAF50; color: black; text-decoration: none; border-radius: 5px; margin: 20px;">
         Verify Email
       </a>
       <p>This link expires in 24 hours.</p>

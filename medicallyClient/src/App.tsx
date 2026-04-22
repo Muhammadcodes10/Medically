@@ -1,5 +1,6 @@
 import Compilation from "./components/clientCompilation";
 import Register from "./components/Signup";
+import CheckEmail from "./components/checkEmail";
 import Login from "./components/login";
 import GenerateTicket from "./components/ticketGeneration";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<Compilation />} />
           <Route path="/getTicket" element={<GenerateTicket />} />
           <Route path="/signup" element={<Register />} />
+          <Route path="/checkEmail" element={<CheckEmail />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>

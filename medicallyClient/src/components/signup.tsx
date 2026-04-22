@@ -38,7 +38,7 @@ function Register() {
   const navigate = useNavigate();
 
   function useRedirect() {
-    navigate("/login");
+    navigate("/");
   }
 
   async function sendData() {
@@ -169,7 +169,19 @@ function Register() {
               required
             />
 
-            <button className="signup-btn" type="submit">
+            <button
+              className="signup-btn"
+              type="submit"
+              onClick={() => {
+                form.email === "" ||
+                form.password === "" ||
+                form.name === "" ||
+                form.username === "" ||
+                form.DoB === ""
+                  ? null
+                  : navigate("/checkEmail");
+              }} 
+            >
               Sign Up
             </button>
           </form>
