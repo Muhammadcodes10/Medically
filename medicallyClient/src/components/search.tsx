@@ -60,7 +60,7 @@ function Search() {
           onChange={handleChange}
         ></input>
       </form>
-      <h1> How to use: </h1>
+      {/* <h1> How to use: </h1>
       <ul>
         <li className="TreatmentText">Open live location </li>
         <li className="TreatmentText">Search for particular treatment </li>
@@ -68,7 +68,7 @@ function Search() {
           Medico provides direction to the nearest hospital that offers your
           desired treatment.{" "}
         </li>
-      </ul>
+      </ul> */}
 
       {/* <button type="submit" onClick={() => setClicked(true)}>Open maps</button> */}
 

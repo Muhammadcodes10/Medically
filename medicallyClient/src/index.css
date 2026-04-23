@@ -6,6 +6,12 @@ body {
   color */
   font-family: Raleway, sans-serif;
   font-size: larger;
+  margin: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 html,
 #root {
@@ -366,7 +372,7 @@ textarea:focus {
 
 .signup-btn:hover {
   color: white;
-  transform: scaleY(1.04)
+  transform: scaleY(1.04);
 }
 .already-has-an-account-btn {
   margin-bottom: 2rem;
@@ -407,57 +413,47 @@ textarea:focus {
   font-size: 200%;
 }
 
-.base-wrapper{
+.base-wrapper {
   display: flex;
+  top: 0;
   height: 100vh;
   width: 100%;
 }
 
-.base-left-panel{
-    display: flex;
-  justify-content: space-between;
-  width: 130px;
-  height: 100%;
-  flex-direction: column;  
-  border-radius: 1rem;
-  padding: 1rem; 
-  padding-top: 2rem;
-  border: 1px solid #d1d5db; 
-  align-items: center;
-  border-radius: 1px;
-  margin: -0.4rem;
-
-}
-
-.base-main-panel{
+.base-main-panel {
   display: flex;
+  flex-direction: column;
   justify-content: start;
   width: 100%;
-  flex: 1;
+  height: 100%;
+  /* flex: 1; */
   padding: 1rem 2rem;
-  font-size: xx-large;
+  font-size: large;
   font-weight: 700;
   align-items: start;
+  gap: 3rem;
   /* background-color: red; */
 }
+.base-main-panel .textarea{
+  padding-top: 1.5rem;
+  font-size: x-large;
 
-.sidepanel-container{
-  padding-bottom: 1.45rem;
-  
 }
 
-.side-panel{
+.side-panel {
   display: flex;
+  box-sizing: border-box;
+
   justify-content: space-between;
   width: 130px;
   height: 100%;
-  flex-direction: column;  
-  border-radius: 1rem;
-  padding: 2rem; 
-  border: 1px solid #d1d5db;  
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid #d1d5db;
 }
 
-.side-panel-topGroup, .side-panel-bottomGroup{
+.side-panel-topGroup,
+.side-panel-bottomGroup {
   color: green;
   display: flex;
   flex-direction: column;
@@ -467,7 +463,7 @@ textarea:focus {
   margin-bottom: 1rem;
 }
 
-.side-panel .material-symbols-rounded{
+.side-panel .material-symbols-rounded {
   font-size: xx-large;
   padding: 0.5rem;
   color: black;

@@ -87,7 +87,7 @@ function Intro({ treatment }: mapsProps) {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
   return (
     <APIProvider apiKey={apiKey}>
-      <div style={{ height: "100vh", width: "100vw", position: "relative" }}>
+      <div style={{ height: "100vh", width: "100%", position: "relative", paddingTop: "2rem" }}>
         <Map
           mapId={import.meta.env.VITE_GOOGLE_MAPS_ID}
           defaultZoom={4}
