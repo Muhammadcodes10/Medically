@@ -5,19 +5,17 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
 
-  function useRedirect() {
-    navigate("/signup");
-  }
-
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
 
+  const [flag, setFlag] = useState(false);
   async function handleLogin() {
     console.log("Handle login is ran!");
     await LoginApi(form.username, form.password)
       .then((response) => {
+        setFlag(true);
         console.log("login successful:", response);
       })
       .catch((error) => {
@@ -69,7 +67,11 @@ function Login() {
                 required
               />
 
-              <button className="signup-btn" type="submit">
+              <button
+                className="signup-btn"
+                type="submit"
+                onClick={() => flag == true && navigate("/base")}
+              >
                 Log in
               </button>
             </form>
