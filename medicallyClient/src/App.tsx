@@ -1,5 +1,5 @@
 import Compilation from "./components/clientCompilation";
-import Register from "./components/Signup";
+import Register from "./components/signup";
 import CheckEmail from "./components/checkEmail";
 import Login from "./components/login";
 import GenerateTicket from "./components/ticketGeneration";
@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Compilation />} />
-          <Route path="/getTicket" element={<GenerateTicket />} />
+          <Route path="/getTicket" element={<GenerateTicket fullname="" />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/checkEmail" element={<CheckEmail />} />
           <Route path="/login" element={<Login />} />

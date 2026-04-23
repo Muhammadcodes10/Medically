@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
-import LoginApi  from "../apis/loginApi";
+import LoginApi from "../apis/loginApi";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
+  function useRedirect() {
+    navigate("/signup");
+  }
+
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -67,7 +74,10 @@ function Login() {
               </button>
             </form>
 
-            <button className="already-has-an-account-btn">
+            <button
+              className="already-has-an-account-btn"
+              onClick={() => navigate("/signup")}
+            >
               Don't have an account?
             </button>
           </div>
