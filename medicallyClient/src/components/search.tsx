@@ -17,7 +17,7 @@ function Search() {
         ...formData,
         [e.target.name]: e.target.value,
       });
-      if (submitted === true){
+      if (submitted === true) {
         setSubmitted(false);
       }
     }
@@ -39,16 +39,15 @@ function Search() {
     }, 4500);
     return () => clearTimeout(timer);
   }, []);
-  
 
   return (
     <>
-      <h1 style={{ color: "green" }}>
+      <h3 style={{ color: "green" }}>
         {" "}
         {showH1
           ? "Get your medical treatment(s) at a discounted rate today!"
           : null}
-      </h1>
+      </h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="searchbar" className="TreatmentText">
           <strong>What treatment are we looking for today?</strong>{" "}
