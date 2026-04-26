@@ -196,7 +196,26 @@ function BasePage() {
             <div className="bmp-box1">
               <SpendingChart />{" "}
             </div>
-            <div className="bmp-box2">Medical trackrecord</div>
+            <div className="bmp-box2">
+              <div className="timeline">
+                <div className="timeline-item">
+                  
+                  <div className="timeline-content">
+                    <span className="timeline-date"> <div className="timeline-dot" />May 2026</span>
+                    <h3>Iron checkup at Zankli</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit molestias pariatur rerum tempore iste ad, suscipit commodi praesentium blanditiis molestiae fugiat assumenda quidem odio totam dolore laudantium eligendi dolor dicta vel ipsam culpa earum repellendus sunt nisi. Eveniet recusandae beatae nisi accusamus quisquam error porro perferendis, sit dolor quis amet maiores, sed cupiditate fugiat iste! Repellat magni omnis maxime a quis veniam quasi, illo recusandae dolore sequi itaque cupiditate officiis ea minima aspernatur autem velit eius exercitationem non voluptates totam hic eos. Dolores, alias consequuntur atque excepturi, similique architecto neque magnam perspiciatis esse quos, labore fuga laboriosam corrupti? Doloremque, ipsa!</p>
+                  </div>
+                </div>
+                <div className="timeline-item">
+                  <div className="timeline-dot" />
+                  <div className="timeline-content">
+                    <span className="timeline-date">February 2026</span>
+                    <h3>Blood test at Belam Medicals</h3>
+                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, quo! Eius ducimus nobis molestiae expedita id laboriosam. Ipsa explicabo doloribus excepturi, aperiam at deleniti quibusdam distinctio obcaecati possimus libero cupiditate. Saepe veniam sunt dicta praesentium doloremque. Similique amet eveniet ut itaque, impedit rem aliquam corporis minima autem deserunt tempore qui labore ex sapiente, reprehenderit explicabo dolorum porro possimus, repellendus soluta odit harum? Mollitia minima soluta voluptatibus. Qui, animi minus. Porro, omnis eligendi fugit quisquam iure similique, voluptates eius voluptatibus, illo ipsam aspernatur esse maxime voluptatem?</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
