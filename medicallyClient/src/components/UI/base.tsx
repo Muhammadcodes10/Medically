@@ -1,4 +1,82 @@
 import Search from "../search";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
+const spendingData = Array.from({ length: 12 }, (_, i) => ({
+  month: new Date(2025, i).toLocaleString("default", { month: "short" }),
+  amount: Math.floor(Math.random() * 1000000),
+}));
+
+const totalSpent = spendingData.reduce((acc, curr) => acc + curr.amount, 0);
+function CustomTooltip({ active, payload, label }: any) {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          backgroundColor: "white",
+          border: "1px solid #035323",
+          borderRadius: "8px",
+          padding: "10px 16px",
+          fontSize: "0.85rem",
+        }}
+      >
+        <p style={{ color: "#035323", fontWeight: "bold" }}>Month: {label}</p>
+        <p style={{ color: "#333" }}>Spent: ₦{payload[0].value}</p>
+      </div>
+    );
+  }
+  return null;
+}
+function SpendingChart() {
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <BarChart
+        data={spendingData}
+        margin={{ top: 0, right: 0, left: 50, bottom: 0 }}
+        style={{ cursor: "default" }}
+      >
+        <CartesianGrid strokeDasharray="4 2" stroke="" />
+        <XAxis
+          dataKey="month"
+          tick={{ fill: "#333", fontSize: "1.00rem", fontFamily: "Raleway" }}
+          axisLine={{ stroke: "#e0e0e0" }}
+          tickLine={false}
+        />
+        <YAxis
+          tick={{ fill: "#333", fontSize: "1.00rem", fontFamily: "Raleway" }}
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={(value) => `₦${value}`}
+          width={50}
+        />
+        <Tooltip
+          //   isAnimationActive={false}
+          animationDuration={50}
+          cursor={{ fill: "transparent" }}
+          content={<CustomTooltip />}
+        />
+        <Bar
+          //   isAnimationActive={false}
+          animationDuration={100}
+          type="monotone"
+          dataKey="amount"
+          stroke="#067533"
+          radius={[6, 6, 0, 0]}
+          fill="#035"
+          strokeWidth={2}
+
+          //   dot={true}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+}
 function BasePage() {
   return (
     <div className="base-wrapper">
@@ -97,8 +175,27 @@ function BasePage() {
               assumenda alias perspiciatis delectus?{" "}
             </p>
           </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "start",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "1.5rem",
+                color: "#035323",
+                fontWeight: "bold",
+              }}
+            >
+              Total Spent: ₦{totalSpent.toLocaleString()}
+            </div>
+          </div>
           <div className="bmp-containers">
-            <div className="bmp-box1">Total spent ($)</div>
+            <div className="bmp-box1">
+              <SpendingChart />{" "}
+            </div>
             <div className="bmp-box2">Medical trackrecord</div>
           </div>
         </div>
