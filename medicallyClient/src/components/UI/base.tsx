@@ -210,7 +210,7 @@ function BasePage() {
                   <div className="timeline-dot" />
                   <div className="timeline-content">
                     <span className="timeline-date">February 2026</span>
-                    <h3>Blood test at Belam Medicals</h3>
+                    <h3>Blood test at Belam Medicals Consultants.</h3>
                     <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, quo! Eius ducimus nobis molestiae expedita id laboriosam. Ipsa explicabo doloribus excepturi, aperiam at deleniti quibusdam distinctio obcaecati possimus libero cupiditate. Saepe veniam sunt dicta praesentium doloremque. Similique amet eveniet ut itaque, impedit rem aliquam corporis minima autem deserunt tempore qui labore ex sapiente, reprehenderit explicabo dolorum porro possimus, repellendus soluta odit harum? Mollitia minima soluta voluptatibus. Qui, animi minus. Porro, omnis eligendi fugit quisquam iure similique, voluptates eius voluptatibus, illo ipsam aspernatur esse maxime voluptatem?</p>
                   </div>
                 </div>

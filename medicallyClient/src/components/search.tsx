@@ -70,7 +70,7 @@ function Search() {
       </ul> */}
 
       {/* <button type="submit" onClick={() => setClicked(true)}>Open maps</button> */}
-
+      {/* {console.log("The formdata is: ", formData.result)} */}
       {submitted === true && <Intro treatment={formData.result} />}
     </>
   );

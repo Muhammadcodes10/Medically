@@ -24,14 +24,15 @@ function Intro({ treatment }: mapsProps) {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [fullname, setFullname] = useState("");
   const [age, setAge] = useState("");
+  const [showMap, setShowMap] = useState(false);
   const [hospitalName, setHospitalName] = useState();
   const { location, loading, error } = useGeolocation();
-  const position = { lat: location.lat, lng: location.lng };
+  const position = { lat: 6.6137, lng: 3.3553 };
   let navig = useNavigate(); //
 
   function generateTicket() {
-  navig("/getTicket", { state: { fullname, age, treatment } });
-}
+    navig("/getTicket", { state: { fullname, age, treatment } });
+  }
   function Directions() {
     const map = useMap();
     const routesLibrary = useMapsLibrary("routes");
@@ -71,8 +72,7 @@ function Intro({ treatment }: mapsProps) {
           "The result from the checkTreatment function is: ",
           result.nearestHospital[0],
         );
-        setHospitalName(result.nearestHospital[0]);
-        
+        setHospitalName(result.nearestHospital);
       } catch (err) {
         console.log("Handlecheck has an error");
         console.error(err);
@@ -87,41 +87,17 @@ function Intro({ treatment }: mapsProps) {
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
   return (
     <APIProvider apiKey={apiKey}>
-      <div style={{ height: "100vh", width: "100%", position: "relative", paddingTop: "2rem" }}>
-        <Map
-          mapId={import.meta.env.VITE_GOOGLE_MAPS_ID}
-          defaultZoom={4}
-          defaultCenter={{ lat: 9.06, lng: 7.4899 }}
-          fullscreenControl={false}
-          streetViewControl={false}
-          zoomControl={false}
-          style={{ height: "100%", width: "100%" }}
-        >
-          <Directions />
-          <AdvancedMarker
-            position={{ lat: 9.06, lng: 7.4899 }}
-          ></AdvancedMarker>
-          <AdvancedMarker
-            position={{ lat: 9.06, lng: 7.4899 }}
-          ></AdvancedMarker>
-        </Map>
-
-        {!Orderselected && (
-          <div
-            style={{
-              position: "relative",
-              width: "70%",
-              background: "white",
-              opacity: 0.94,
-              padding: "20px",
-              zIndex: 2,
-              marginTop: "-17%",
-              marginLeft: "10%",
-              borderTopLeftRadius: "20px",
-              borderTopRightRadius: "20px",
-              boxShadow: "0 -4px 20px rgba(0,0,0,0.2)",
-            }}
-          >
+      <div
+        style={{
+          height: "100vh",
+          opacity: "100%",
+          width: "100%",
+          position: "relative",
+          paddingTop: "2rem",
+        }}
+      >
+        {!showMap && (
+          <div className="first-search">
             {hospitalName === null && (
               <h1>
                 <strong style={{ color: "green" }}>{treatment}</strong>{" "}
@@ -151,204 +127,275 @@ function Intro({ treatment }: mapsProps) {
                 borderRadius: "8px",
               }}
               onClick={() => {
-                setOrderselected(true);
+                setShowMap(true);
               }}
             >
-              Complete payment
+              View on map
             </button>
           </div>
         )}
-        {Orderselected && paymentClicked === false && (
-          <div
-            style={{
-              position: "relative",
-              width: "70%",
-              background: "white",
-              opacity: 0.94,
-              padding: "20px",
-              zIndex: 2,
-              marginTop: "-27%",
-              marginLeft: "10%",
-              borderTopLeftRadius: "20px",
-              borderTopRightRadius: "20px",
-              boxShadow: "0 -4px 20px rgba(0,0,0,0.2)",
-            }}
-          >
-            <h1>
-              <strong style={{ color: "green" }}>{treatment}</strong> treatment
-              costs #40,000 at Belam Medicals
-            </h1>
-            <label> Full name: </label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setFullname(e.target.value);
-              }}
-            />
+        {showMap && (
+          <div className="map-modal-overlay" onClick={() => setShowMap(false)}>
+            <div className="map-modal" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="close-button-maps"
+                onClick={() => setShowMap(false)}
+              >
+                X
+              </button>
+              <Map
+                mapId={import.meta.env.VITE_GOOGLE_MAPS_ID}
+                defaultZoom={4}
+                defaultCenter={{ lat: 9.06, lng: 7.4899 }}
+                fullscreenControl={false}
+                streetViewControl={false}
+                zoomControl={false}
+                style={{ height: "100%", width: "100%" }}
+              >
+                <Directions />
+                <AdvancedMarker
+                  position={{ lat: 9.06, lng: 7.4899 }}
+                ></AdvancedMarker>
+                <AdvancedMarker
+                  position={{ lat: 9.06, lng: 7.4899 }}
+                ></AdvancedMarker>
+              </Map>
+              {showMap && (
+                <div className="first-search">
+                  {hospitalName === null && (
+                    <h1>
+                      <strong style={{ color: "green" }}>{treatment}</strong>{" "}
+                      treatment is not available anywhere at the moment.
+                    </h1>
+                  )}
+                  {hospitalName !== null && hospitalName !== undefined && (
+                    <h1>
+                      <strong style={{ color: "green" }}>{treatment}</strong>{" "}
+                      treatment is available at {hospitalName[0]}
+                    </h1>
+                  )}
+                  <h3>
+                    Background: Belam Medicals is a medical center located in
+                    Abuja with a rating of 4.5/5
+                  </h3>
 
-             <label> Enter age: </label>
-            <input
-              type="text"
-              placeholder="Enter your age"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setAge(e.target.value);
-              }}
-            />
-
-            <div>
-              <h3>When do you want your treatment?</h3>
-
-              <label style={{ display: "block", marginBottom: "10px" }}>
-                <input
-                  className="radioStyles"
-                  type="radio"
-                  name="payment"
-                  onChange={() => setSelectedTreatmentDay("Immediate")}
-                />
-                Immediately
-              </label>
-
-              <label style={{ display: "block", marginBottom: "10px" }}>
-                <input
-                  className="radioStyles"
-                  type="radio"
-                  name="payment"
-                  onChange={() => setSelectedTreatmentDay("Later date")}
-                />
-                On a later date
-                {selectedTreatmentDay === "Later date" && <input type="date" />}
-              </label>
-            </div>
-
-            <button
-              style={{
-                width: "fit-content",
-                marginTop: "1%",
-                padding: "10px 12px",
-                background: "black",
-                color: "white",
-                fontFamily: "Raleway",
-                border: "none",
-                textAlign: "left",
-                borderRadius: "8px",
-              }}
-              onClick={() => {
-                setPaymentClicked(true);
-              }}
-            >
-              Pay
-            </button>
-          </div>
-        )}
-        {Orderselected && paymentClicked && (
-          <div
-            style={{
-              background: "white",
-              opacity: 0.94,
-              width: "50%",
-              padding: "20px",
-              zIndex: 2,
-              marginTop: "-33%",
-              marginLeft: "20%",
-              borderTopLeftRadius: "20px",
-              borderTopRightRadius: "20px",
-              boxShadow: "0 -4px 20px rgba(0,0,0,0.2)",
-            }}
-          >
-            <h3>How do you want to pay?</h3>
-
-            <label style={{ display: "block", marginBottom: "10px" }}>
-              <input
-                className="radioStyles"
-                type="radio"
-                name="typeofPayment"
-                onChange={() => setPaymentMethod("Cash")}
-              />
-              Pay cash at the counter
-            </label>
-
-            <label style={{ display: "block", marginBottom: "10px" }}>
-                  
-              <input
-                className="radioStyles"
-                type="radio"
-                name="typeofPayment"
-                onChange={() => setPaymentMethod("Card")}
-              />
-              Pay with card now [10% discount]
-              {paymentMethod === "Cash" && (
-                <div>
                   <button
-                  onClick={() => fullname !== "" && generateTicket()}
                     style={{
-                      width: "100%",
-                      padding: "12px",
+                      width: "fit-content",
+                      padding: "10px 12px",
                       background: "black",
                       color: "white",
-                      border: "none",
-                      borderRadius: "8px",
-                      marginTop: "15px",
-                      cursor: "pointer",
                       fontFamily: "Raleway",
+                      border: "none",
+                      textAlign: "left",
+                      borderRadius: "8px",
+                    }}
+                    onClick={() => {
+                      setOrderselected(true);
                     }}
                   >
-                    Finalize order
+                    Complete payment
                   </button>
                 </div>
-                
               )}
-              {paymentMethod === "Card" && (
-                <div>
-                  <h3>Payment Details</h3>
-
-                  {/* Card Number */}
+              {Orderselected && paymentClicked === false && (
+                <div
+                  style={{
+                    position: "relative",
+                    width: "70%",
+                    background: "white",
+                    opacity: 0.94,
+                    padding: "20px",
+                    zIndex: 2,
+                    marginTop: "-27%",
+                    marginLeft: "10%",
+                    borderTopLeftRadius: "20px",
+                    borderTopRightRadius: "20px",
+                    boxShadow: "0 -4px 20px rgba(0,0,0,0.2)",
+                  }}
+                >
+                  <h1>
+                    <strong style={{ color: "green" }}>{treatment}</strong>{" "}
+                    treatment costs #40,000 at Belam Medicals
+                  </h1>
+                  <label> Full name: </label>
                   <input
-                    style={{ marginBottom: "20px" }}
                     type="text"
-                    placeholder="Card Number"
-                    maxLength={19}
+                    placeholder="Enter your full name"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setFullname(e.target.value);
+                    }}
                   />
 
-                  {/* Cardholder Name */}
+                  <label> Enter age: </label>
                   <input
                     type="text"
-                    placeholder="Cardholder Name"
-                    style={{ marginBottom: "20px" }}
+                    placeholder="Enter your age"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setAge(e.target.value);
+                    }}
                   />
 
-                  {/* Expiry + CVV row */}
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <input type="text" placeholder="MM/YY" maxLength={5} />
+                  <div>
+                    <h3>When do you want your treatment?</h3>
 
-                    <input type="password" placeholder="CVV" maxLength={4} />
+                    <label style={{ display: "block", marginBottom: "10px" }}>
+                      <input
+                        className="radioStyles"
+                        type="radio"
+                        name="payment"
+                        onChange={() => setSelectedTreatmentDay("Immediate")}
+                      />
+                      Immediately
+                    </label>
+
+                    <label style={{ display: "block", marginBottom: "10px" }}>
+                      <input
+                        className="radioStyles"
+                        type="radio"
+                        name="payment"
+                        onChange={() => setSelectedTreatmentDay("Later date")}
+                      />
+                      On a later date
+                      {selectedTreatmentDay === "Later date" && (
+                        <input type="date" />
+                      )}
+                    </label>
                   </div>
 
                   <button
                     style={{
-                      width: "100%",
-                      padding: "12px",
+                      width: "fit-content",
+                      marginTop: "1%",
+                      padding: "10px 12px",
                       background: "black",
                       color: "white",
+                      fontFamily: "Raleway",
                       border: "none",
+                      textAlign: "left",
                       borderRadius: "8px",
-                      marginTop: "15px",
-                      cursor: "pointer",
                     }}
-                    onClick={() => fullname !== "" && generateTicket()}
+                    onClick={() => {
+                      setPaymentClicked(true);
+                    }}
                   >
-                    Pay Now
-                    {/* I will place the ticket after the user clicks the payment button */}
+                    Pay
                   </button>
-       
-
                 </div>
-                
               )}
-            </label>
+              {Orderselected && paymentClicked && (
+                <div
+                  style={{
+                    background: "white",
+                    opacity: 0.94,
+                    width: "50%",
+                    padding: "20px",
+                    zIndex: 2,
+                    marginTop: "-33%",
+                    marginLeft: "20%",
+                    borderTopLeftRadius: "20px",
+                    borderTopRightRadius: "20px",
+                    boxShadow: "0 -4px 20px rgba(0,0,0,0.2)",
+                  }}
+                >
+                  <h3>How do you want to pay?</h3>
+
+                  <label style={{ display: "block", marginBottom: "10px" }}>
+                    <input
+                      className="radioStyles"
+                      type="radio"
+                      name="typeofPayment"
+                      onChange={() => setPaymentMethod("Cash")}
+                    />
+                    Pay cash at the counter
+                  </label>
+
+                  <label style={{ display: "block", marginBottom: "10px" }}>
+                    <input
+                      className="radioStyles"
+                      type="radio"
+                      name="typeofPayment"
+                      onChange={() => setPaymentMethod("Card")}
+                    />
+                    Pay with card now [10% discount]
+                    {paymentMethod === "Cash" && (
+                      <div>
+                        <button
+                          onClick={() => fullname !== "" && generateTicket()}
+                          style={{
+                            width: "100%",
+                            padding: "12px",
+                            background: "black",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "8px",
+                            marginTop: "15px",
+                            cursor: "pointer",
+                            fontFamily: "Raleway",
+                          }}
+                        >
+                          Finalize order
+                        </button>
+                      </div>
+                    )}
+                    {paymentMethod === "Card" && (
+                      <div>
+                        <h3>Payment Details</h3>
+
+                        {/* Card Number */}
+                        <input
+                          style={{ marginBottom: "20px" }}
+                          type="text"
+                          placeholder="Card Number"
+                          maxLength={19}
+                        />
+
+                        {/* Cardholder Name */}
+                        <input
+                          type="text"
+                          placeholder="Cardholder Name"
+                          style={{ marginBottom: "20px" }}
+                        />
+
+                        {/* Expiry + CVV row */}
+                        <div style={{ display: "flex", gap: "20px" }}>
+                          <input
+                            type="text"
+                            placeholder="MM/YY"
+                            maxLength={5}
+                          />
+
+                          <input
+                            type="password"
+                            placeholder="CVV"
+                            maxLength={4}
+                          />
+                        </div>
+
+                        <button
+                          style={{
+                            width: "100%",
+                            padding: "12px",
+                            background: "black",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "8px",
+                            marginTop: "15px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => fullname !== "" && generateTicket()}
+                        >
+                          Pay Now
+                          {/* I will place the ticket after the user clicks the payment button */}
+                        </button>
+                      </div>
+                    )}
+                  </label>
+                </div>
+              )}
+            </div>
           </div>
         )}
-
       </div>
     </APIProvider>
   );

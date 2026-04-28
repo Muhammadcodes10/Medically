@@ -218,6 +218,16 @@ button {
   font-size: x-large;
 }
 
+.first-search {
+  /* width: 50%; */
+  background: white;
+  opacity: 0.94;
+  padding: 20px;
+  /* margin-left: 10%; */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+}
 .formGroup {
   display: flex;
   flex-direction: column;
@@ -291,6 +301,37 @@ textarea:focus {
 .logo {
   font-size: xxx-large;
   padding-left: 60px;
+}
+
+.map-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-modal {
+  position: relative;
+  width: 90%;
+  height: 93%;
+  border-radius: 12px;
+  margin-left: 3rem;
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  /* top: 10px; */
+  right: 100px;
+  z-index: 1001;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-weight: 700;
+  background-color: rgb(170, 9, 9);
 }
 
 .midLinks {
@@ -572,6 +613,10 @@ span {
   font-size: x-large;
   margin: 0.5rem;
 }
+.timeline h3 {
+  color: #035323;
+}
+
 .TreatmentText {
   font-size: 1em;
   color: #035323;
