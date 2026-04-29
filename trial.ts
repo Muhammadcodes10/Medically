@@ -52,9 +52,11 @@ const patientSchema = new mongoose.Schema({
 
 const ticketSchema = new mongoose.Schema({
   ticketId: String,
+  name: String,
+  age: Number,
+  treatment: String,
   date: Date,
   status: String,
-  createdAt: Date,
 });
 
 // The model creates a copy of the Schema in a way that allows the instances to be made
@@ -278,6 +280,23 @@ app.post("/updateData", (req, res) => {
   treatment
     .save()
     .then(() => console.log("Treatment saved "))
+    .catch((err) => console.error("Error: ", err));
+});
+
+app.post("/saveTicket", (req, res) => {
+  const data = req.body;
+  const card = new ticket({
+    ticketId: data.ticketId,
+    name: data.name,
+    age: data.age,
+    treatment: data.treatment,
+    date: data.date,
+    status: "Inactive",
+  });
+  console.log(data);
+  card
+    .save()
+    .then(() => console.log("Ticket saved "))
     .catch((err) => console.error("Error: ", err));
 });
 

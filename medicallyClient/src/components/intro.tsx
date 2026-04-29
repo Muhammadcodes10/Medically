@@ -8,7 +8,7 @@ import {
   // Pin,
   // InfoWindow
 } from "@vis.gl/react-google-maps";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import useGeolocation from "../hooks/useGeolocation";
 import { checkTreatment } from "../apis/api";
 import { useNavigate } from "react-router-dom";
@@ -18,24 +18,28 @@ interface mapsProps {
 
 // Done with the map design for now, back to the frontend interface itself/ [12/02/26].
 function Intro({ treatment }: mapsProps) {
-  // Mao control states.
-
   const [Orderselected, setOrderselected] = useState(false);
   const [paymentClicked, setPaymentClicked] = useState(false);
+  const [form, setForm] = useState({
+    fullname: "",
+    age: "",
+  });
   const [showMap, setShowMap] = useState(true);
-  const [showCard, setShowCard] = useState(true);
-
   const [selectedTreatmentDay, setSelectedTreatmentDay] = useState("immediate");
-  const [paymentMethod, setPaymentMethod] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [age, setAge] = useState("");
   const [hospitalName, setHospitalName] = useState();
   const { location, loading, error } = useGeolocation();
   const position = { lat: 6.6137, lng: 3.3553 };
   let navig = useNavigate(); //
 
   function generateTicket() {
-    navig("/getTicket", { state: { fullname, age, treatment } });
+    navig("/getTicket", { state: { fullname: form.fullname, age: form.age, treatment } });
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -228,10 +232,9 @@ function Intro({ treatment }: mapsProps) {
                 <input
                   type="text"
                   required
+                  name="fullname"
                   placeholder="Enter your full name"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setFullname(e.target.value);
-                  }}
+                  onChange={handleChange}
                   className="search-input-maps"
                 />
 
@@ -239,10 +242,9 @@ function Intro({ treatment }: mapsProps) {
                 <input
                   type="text"
                   required
+                  name="age"
                   placeholder="Enter your age"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setAge(e.target.value);
-                  }}
+                  onChange={handleChange}
                   className="search-input-maps"
                 />
 

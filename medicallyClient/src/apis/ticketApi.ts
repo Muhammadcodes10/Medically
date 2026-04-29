@@ -1,8 +1,10 @@
 export async function saveTicket(
+  ticketId: string,
   name: string,
-  email: string,
+  age: string,
   treatment: string,
   date: string,
+
 ) {
   const response = await fetch("http://localhost:3000/saveTicket", {
     method: "POST",
@@ -10,8 +12,9 @@ export async function saveTicket(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      ticketId,
       name,
-      email,
+      age,
       treatment,
       date
     }),

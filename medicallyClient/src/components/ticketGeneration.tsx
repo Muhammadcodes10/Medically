@@ -1,19 +1,24 @@
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import {v4 as uuidv4} from "uuid";
-
-
+import { v4 as uuidv4 } from "uuid";
+import { saveTicket } from "../apis/ticketApi";
 
 interface GenerateTicketProps {
   fullname: string;
 }
-
 
 function GenerateTicket({ fullname = "Jack Doe" }: GenerateTicketProps) {
   const { state } = useLocation();
   const name = state?.fullname || fullname;
   const age = state?.age || "";
   const treatment = state?.treatment || "";
-
+  const ticketId = uuidv4();
+  const date = new Date().toISOString();
+  useEffect(() => {
+    saveTicket(ticketId, name, age, treatment, date)
+      .then(() => console.log("Success"))
+      .catch((err) => console.error(err));
+  });
 
   // rest of your code, replace fullname with name
 
@@ -37,9 +42,7 @@ function GenerateTicket({ fullname = "Jack Doe" }: GenerateTicketProps) {
               <strong>Date:</strong> {new Date().toISOString()}
             </p>
             <p>
-              <strong>Ticket ID:</strong>{" "}
-              {uuidv4()}
-
+              <strong>Ticket ID:</strong> {uuidv4()}
             </p>
           </div>
 
@@ -53,6 +56,5 @@ function GenerateTicket({ fullname = "Jack Doe" }: GenerateTicketProps) {
       </div>
     </>
   );
-
 }
 export default GenerateTicket;
