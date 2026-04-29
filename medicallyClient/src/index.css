@@ -218,16 +218,57 @@ button {
   font-size: x-large;
 }
 
-.first-search {
+.first-search-test {
   /* width: 50%; */
   background: white;
   opacity: 0.94;
   padding: 20px;
   /* margin-left: 10%; */
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  box-shadow: 4px 2px 20px rgba(0, 0, 0, 0.2);
 }
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.first-search {
+  width: 40%;
+  height: fit-content;
+  background: white;
+  opacity: 0.8;
+  padding: 20px;
+  font-size: x-large;
+  position: fixed;
+  bottom: 0;
+  z-index: 9999;
+  margin-bottom: 4rem;
+  box-shadow: 4px 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.treatment-box input {
+  width: fit-content;
+  
+
+}
+.search-input-maps {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.first-search input {
+  /* width: 100%; */
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.first-search h3 {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
 .formGroup {
   display: flex;
   flex-direction: column;
