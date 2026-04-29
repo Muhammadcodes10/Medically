@@ -242,6 +242,7 @@ button {
   padding: 20px;
   font-size: x-large;
   position: fixed;
+  border-radius: 2rem;
   bottom: 0;
   z-index: 9999;
   margin-bottom: 4rem;
@@ -261,7 +262,10 @@ button {
 .first-search input {
   /* width: 100%; */
   margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.7rem;
   margin-bottom: 0.4rem;
+  border-radius: 1rem;
 }
 
 .first-search h3 {

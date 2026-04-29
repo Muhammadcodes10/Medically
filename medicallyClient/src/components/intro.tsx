@@ -37,6 +37,11 @@ function Intro({ treatment }: mapsProps) {
   function generateTicket() {
     navig("/getTicket", { state: { fullname, age, treatment } });
   }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    generateTicket();
+  }
   function Directions() {
     const map = useMap();
     const routesLibrary = useMapsLibrary("routes");
@@ -215,76 +220,80 @@ function Intro({ treatment }: mapsProps) {
         {showMap && Orderselected && paymentClicked === false && (
           <div className="search-container">
             <div className="first-search">
-              <h1 style={{marginBottom: "0.8rem"}}>Enter your details below: </h1>
-              <label> Full name: </label>
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setFullname(e.target.value);
-                }}
-                className="search-input-maps"
-              />
+              <form onSubmit={handleSubmit}>
+                <h1 style={{ marginBottom: "0.8rem" }}>
+                  Enter your details below:{" "}
+                </h1>
+                <label> Full name: </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your full name"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setFullname(e.target.value);
+                  }}
+                  className="search-input-maps"
+                />
 
-              <label> Age: </label>
-              <input
-                type="text"
-                placeholder="Enter your age"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setAge(e.target.value);
-                }}
-                className="search-input-maps"
-              />
+                <label> Age: </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your age"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAge(e.target.value);
+                  }}
+                  className="search-input-maps"
+                />
 
-              <div className="treatment-box">
-                <h3>When do you want your treatment?</h3>
+                <div className="treatment-box">
+                  <h3>When do you want your treatment?</h3>
 
-                <label style={{ display: "block", marginBottom: "10px" }}>
-                  <input
-                    className="radioStyles"
-                    type="radio"
-                    name="payment"
-                    onChange={() => setSelectedTreatmentDay("Immediate")}
-                  />
-                  Immediately
-                </label>
+                  <label style={{ display: "block", marginBottom: "10px" }}>
+                    <input
+                      className="radioStyles"
+                      type="radio"
+                      name="payment"
+                      onChange={() => setSelectedTreatmentDay("Immediate")}
+                    />
+                    Immediately
+                  </label>
 
-                <label style={{ display: "block", marginBottom: "10px" }}>
-                  <input
-                    className="radioStyles"
-                    type="radio"
-                    name="payment"
-                    onChange={() => setSelectedTreatmentDay("Later date")}
-                  />
-                  On a later date
-                  {selectedTreatmentDay === "Later date" && (
-                    <input type="date" />
-                  )}
-                </label>
-              </div>
+                  <label style={{ display: "block", marginBottom: "10px" }}>
+                    <input
+                      className="radioStyles"
+                      type="radio"
+                      name="payment"
+                      onChange={() => setSelectedTreatmentDay("Later date")}
+                    />
+                    On a later date
+                    {selectedTreatmentDay === "Later date" && (
+                      <input type="date" />
+                    )}
+                  </label>
+                </div>
 
-              <button
-                style={{
-                  width: "fit-content",
-                  marginTop: "1%",
-                  padding: "10px 12px",
-                  background: "black",
-                  color: "white",
-                  fontFamily: "Raleway",
-                  border: "none",
-                  textAlign: "left",
-                  borderRadius: "8px",
-                }}
-                onClick={() => {
-                  setPaymentClicked(true);
-                }}
-              >
-                Pay
-              </button>
+                <button
+                  style={{
+                    width: "fit-content",
+                    marginTop: "1%",
+                    padding: "10px 12px",
+                    background: "black",
+                    color: "white",
+                    fontFamily: "Raleway",
+                    border: "none",
+                    textAlign: "left",
+                    borderRadius: "8px",
+                  }}
+                  type="submit"
+                >
+                  Book
+                </button>
+              </form>
             </div>
           </div>
         )}
-        {showMap && Orderselected && paymentClicked && (
+        {/* {showMap && Orderselected && paymentClicked && (
           <div className="search-container">
             <div className="first-search">
               <h3>How do you want to pay?</h3>
@@ -331,7 +340,6 @@ function Intro({ treatment }: mapsProps) {
                   <div>
                     <h3>Payment Details</h3>
 
-                    {/* Card Number */}
                     <input
                       style={{ marginBottom: "20px" }}
                       type="text"
@@ -339,14 +347,12 @@ function Intro({ treatment }: mapsProps) {
                       maxLength={19}
                     />
 
-                    {/* Cardholder Name */}
                     <input
                       type="text"
                       placeholder="Cardholder Name"
                       style={{ marginBottom: "20px" }}
                     />
 
-                    {/* Expiry + CVV row */}
                     <div style={{ display: "flex", gap: "20px" }}>
                       <input type="text" placeholder="MM/YY" maxLength={5} />
 
@@ -367,14 +373,13 @@ function Intro({ treatment }: mapsProps) {
                       onClick={() => fullname !== "" && generateTicket()}
                     >
                       Pay Now
-                      {/* I will place the ticket after the user clicks the payment button */}
                     </button>
                   </div>
                 )}
               </label>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </APIProvider>
   );
