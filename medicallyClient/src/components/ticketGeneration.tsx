@@ -48,7 +48,7 @@ function GenerateTicket({ fullname = "Jack Doe" }: GenerateTicketProps) {
 
           <div className="qrCode">
             <img
-              src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=JohnDoe-CancerCheckup&bgcolor=#edf0eee&color=ffffff&format=png&qzone=1"
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ticketId}&bgcolor=#edf0eee&color=ffffff&format=png&qzone=1`}
               alt="QR Code"
             />
           </div>
