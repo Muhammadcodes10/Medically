@@ -1,9 +1,23 @@
 // This will be the main page of the hospital dashboard.
+import { useState } from "react";
+import QRScanner from "./qrScanner";
+import { lookupTicket } from "../Api/lookupTicketApi";
 function TicketScanner() {
+  const [scannedId, setScannedId] = useState("");
+  const [showScanner, setShowScanner] = useState(false);
+  const [patientData, setPatientData] = useState("");
+  async function handleScan(ticketId: string) {
+    setScannedId(ticketId);
+    const result = await lookupTicket(ticketId);
+    setPatientData(result);
+    setShowScanner(false);
+  }
+
   return (
     <>
       <div className="container-homePage">
         <div className="sidepanel-container">
+          <div></div>
           <div className="side-panel">
             <div className="side-panel-topGroup">
               <div>
@@ -39,9 +53,12 @@ function TicketScanner() {
                 Scan tickets to verify patient booking
               </p>
             </h1>
-            <button><div>
+            <button onClick={() => setShowScanner(true)}>
+              <div>
                 <i className="material-symbols-rounded">replay</i>
-              </div> Scan next ticket</button>
+              </div>{" "}
+              Scan next ticket
+            </button>
           </div>
           <div className="main-panel">
             <div className="leftBox">
@@ -55,8 +72,16 @@ function TicketScanner() {
               <div className="leftBox-prompt">
                 <h3>Scanner paused</h3>
                 <div className="leftBox-scannerContainer">
-                  <i className="material-symbols-rounded">qr_code_scanner</i>
-                  <p> Upload Ticket Image</p>
+                  {showScanner ? (
+                    <QRScanner onScanSuccess={handleScan} />
+                  ) : (
+                    <>
+                      <i className="material-symbols-rounded">
+                        qr_code_scanner
+                      </i>
+                      <a>Upload Ticket Image</a>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
