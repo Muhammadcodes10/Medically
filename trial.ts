@@ -300,6 +300,22 @@ app.post("/saveTicket", (req, res) => {
     .catch((err) => console.error("Error: ", err));
 });
 
+app.get("/lookupTicket", (req, res) => {
+  const ticketId = req.query.ticketId as string;
+  console.log("Looking up ticket ID:", ticketId);
+  ticket
+    .findOne({ ticketId: ticketId })
+    .then((result) => {
+      if (!result) {
+        res.status(404).json({ message: "Ticket not found" });
+        return;
+      }
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
 app.listen(port, () => {
   console.log(`TypeScript with Express http://localhost:${port}/`);
 });

@@ -36,7 +36,7 @@ function QRScanner({ onScanSuccess }: QRScannerProps) {
   // cleanup on unmount
   useEffect(() => {
     return () => {
-      scannerRef.current?.stop().catch(() => {});
+      scannerRef.current?.stop()?.catch(() => {});
     };
   }, []);
 

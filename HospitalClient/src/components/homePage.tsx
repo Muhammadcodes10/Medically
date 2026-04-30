@@ -8,6 +8,7 @@ function TicketScanner() {
   const [patientData, setPatientData] = useState("");
   async function handleScan(ticketId: string) {
     setScannedId(ticketId);
+    console.log("Scanned ticket ID 2:", ticketId);
     const result = await lookupTicket(ticketId);
     setPatientData(result);
     setShowScanner(false);
