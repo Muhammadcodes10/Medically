@@ -11,8 +11,12 @@ function TicketScanner() {
     console.log("Scanned ticket ID 2:", ticketId);
     const result = await lookupTicket(ticketId);
     setPatientData(result);
+
     setShowScanner(false);
   }
+
+  console.log("Scanned ticket ID:", scannedId);
+  console.log("Patient data:", patientData);
 
   return (
     <>
