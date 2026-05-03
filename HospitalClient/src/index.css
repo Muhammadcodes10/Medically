@@ -1,17 +1,15 @@
-*{
-  
+* {
   box-sizing: border-box;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-
-body{
+body {
   margin: 0;
   font-size: larger;
-  min-height:100vh;
+  min-height: 100vh;
 }
 
-.container{
+.container {
   max-width: 600px;
   margin: 10rem auto;
   border-radius: 5rem;
@@ -21,8 +19,7 @@ body{
   gap: 3rem;
 }
 
-
-.social-button{
+.social-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,46 +34,44 @@ body{
   transition: 0.3s ease;
 }
 
-.social-button:hover{
+.social-button:hover {
   transform: scale(1.05);
 }
 
-.login-text-wrapper{
+.login-text-wrapper {
   margin: 0 0;
   font-size: x-large;
   text-align: center;
 }
- .login-text{
+.login-text {
   color: midnightblue;
   font-weight: 600;
-  
 }
 
-.login-details-text{
+.login-details-text {
   color: black;
   font-size: larger;
   font-weight: 600;
 }
 
-.login-form{
+.login-form {
   margin: 0 0;
 }
 
-.seperator{
+.seperator {
   margin: 2rem 0;
   text-align: center;
   position: relative;
-
 }
-.seperator span{
+.seperator span {
   z-index: 1;
   position: relative;
   padding: 0 0.9rem;
   font-size: 1.5rem;
   font-weight: 500;
-  background: #fff
+  background: #fff;
 }
-.seperator::after{
+.seperator::after {
   position: absolute;
   content: "";
   left: 0;
@@ -86,7 +81,7 @@ body{
   top: 50%;
 }
 
-.input-field{
+.input-field {
   height: 100%;
   font-weight: 500;
   font-size: x-large;
@@ -97,37 +92,37 @@ body{
   border: 1px solid #bfb3f2;
 }
 
-.input-field:focus{
-  border: 2px solid brown;;
+.input-field:focus {
+  border: 2px solid brown;
 }
-.input-field::placeholder{
-  color: #a395e0
+.input-field::placeholder {
+  color: #a395e0;
 }
-.input-wrapper{
+.input-wrapper {
   position: relative;
   padding: 0.5rem 0;
 }
-.input-wrapper label{
+.input-wrapper label {
   font-weight: 700;
   font-size: x-large;
 }
-.login-button{
+.login-button {
   width: 100%;
   border-radius: 2rem;
   font-size: larger;
   padding: 1.5rem;
   margin-top: 4rem;
   border: none;
-  background-color:midnightblue;
+  background-color: midnightblue;
   color: white;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
-.login-button:hover{
+.login-button:hover {
   transform: scale(1.05);
 }
-.signup-wrapper{
+.signup-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,19 +132,19 @@ body{
   margin: 1rem 0;
 }
 
-.signup-text{
+.signup-text {
   color: midnightblue;
 }
 
-.signup-text::after{
-  color: yellow
+.signup-text::after {
+  color: yellow;
 }
 
-.forgot-password{
+.forgot-password {
   font-size: larger;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
@@ -161,43 +156,43 @@ a{
   transition: 0.2s ease;
 }
 
-.login-form .input-wrapper i.eye-icon{
+.login-form .input-wrapper i.eye-icon {
   cursor: pointer;
   right: 1rem;
   display: none;
 }
 
-.input-field:valid ~ i.eye-icon{
+.input-field:valid ~ i.eye-icon {
   display: block;
 }
-.login-form .input-wrapper i:not(.eye-icon){
+.login-form .input-wrapper i:not(.eye-icon) {
   left: 1rem;
   pointer-events: none;
 }
 
-.container-homePage{
+.container-homePage {
   display: flex;
   height: 100vh;
   width: 100%;
 }
 
-.sidepanel-container{
+.sidepanel-container {
   padding-bottom: 1.45rem;
-  
 }
 
-.side-panel{
+.side-panel {
   display: flex;
   justify-content: space-between;
   width: 130px;
   height: 100%;
-  flex-direction: column;  
+  flex-direction: column;
   border-radius: 1rem;
-  padding: 2rem; 
-  border: 1px solid #d1d5db;  
+  padding: 2rem;
+  border: 1px solid #d1d5db;
 }
 
-.side-panel-topGroup, .side-panel-bottomGroup{
+.side-panel-topGroup,
+.side-panel-bottomGroup {
   color: green;
   display: flex;
   flex-direction: column;
@@ -207,33 +202,32 @@ a{
   margin-bottom: 1rem;
 }
 
-.side-panel .material-symbols-rounded{
+.side-panel .material-symbols-rounded {
   font-size: xx-large;
   padding: 0.5rem;
   color: black;
 }
 
-.whole-panel{
+.whole-panel {
   display: flex;
   flex: 1;
   flex-direction: column;
   padding: 1.5rem;
 }
-.main-panel{
+.main-panel {
   display: flex;
   height: 100%;
   width: 100%;
   gap: 2rem;
 }
 
-
-.ticketcontainer{
+.ticketcontainer {
   display: flex;
   justify-content: space-between;
 }
 
-.ticketcontainer button{
-   border-radius: 25px;
+.ticketcontainer button {
+  border-radius: 25px;
   font-size: xx-large;
   padding: 1rem;
   color: rgb(0, 0, 0);
@@ -244,24 +238,22 @@ a{
   color: white;
   cursor: pointer;
 }
-.ticket-header{
+.ticket-header {
   font-weight: 700;
-  margin-top : 0rem;
-
+  margin-top: 0rem;
 }
-.ticket-subtext{
+.ticket-subtext {
   font-weight: 400;
   gap: 0;
   margin-top: -0.1rem;
   font-size: large;
-  color: #6b7280; 
+  color: #6b7280;
 }
 
-
- /* background-color: #a90d27; */
+/* background-color: #a90d27; */
 .leftBox,
 .rightBox {
-  flex: 1;                  /* 🔥 equal width */
+  flex: 1; /* 🔥 equal width */
   display: flex;
   flex-direction: column;
   border: 1px solid #d1d5db;
@@ -270,40 +262,109 @@ a{
   background: #fff;
 }
 
-.leftBox-heading{
+.leftBox-heading {
   margin-left: 1rem;
 }
-.leftBox-scannerContainer{
+.leftBox-scannerContainer {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.leftBox-heading-subtext{
+.leftBox-heading-subtext {
   color: #6b7280;
-
 }
-.leftBox-prompt{
+.leftBox-prompt {
   text-align: center;
   margin-top: 15rem;
   color: #6b7280; /* soft gray */
 }
 
-
-
-.rightBox-heading{
+.rightBox-heading {
   margin-left: 1rem;
 }
-.rightBox-img{
+.rightBox-img {
   display: block;
   margin: 5rem auto;
 }
 
-.rightBox-prompt{
+.rightBox-prompt {
   text-align: center;
-  margin: 0 auto;
+  margin-top: 20rem;
+  color: #6b7280; /* soft gray */
 }
 
-.rightBox-prompt-subtext{
+.rightBox-prompt-subtext {
   color: #6b7280;
+}
+
+.scan-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Checkmark */
+.checkmark {
+  width: 80px;
+  height: 80px;
+}
+
+.checkmark-circle {
+  stroke: #035323;
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: strokeDraw 0.6s ease forwards;
+}
+
+.checkmark-check {
+  stroke: #035323;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: strokeDraw 0.4s ease 0.6s forwards;
+}
+
+/* Crossmark */
+.crossmark {
+  width: 80px;
+  height: 80px;
+}
+
+.crossmark-circle {
+  stroke: #dc2626;
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: strokeDraw 0.6s ease forwards;
+}
+
+.crossmark-cross {
+  stroke: #dc2626;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: strokeDraw 0.4s ease 0.6s forwards;
+}
+
+@keyframes strokeDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

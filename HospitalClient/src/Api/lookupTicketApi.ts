@@ -9,7 +9,7 @@ export async function lookupTicket(ticketId: string) {
     },
   );
   if (!response.ok) {
-    throw new Error("Failed to lookup ticket");
+    throw new Error("Ticket not found");
   }
   return response.json();
 }
