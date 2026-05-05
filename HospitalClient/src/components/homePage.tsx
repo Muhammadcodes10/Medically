@@ -2,6 +2,7 @@
 import { useState } from "react";
 import QRScanner from "./qrScanner";
 import { lookupTicket } from "../Api/lookupTicketApi";
+import {  useNavigate } from "react-router-dom";
 function TicketScanner() {
   const [scannedId, setScannedId] = useState("");
   const [showScanner, setShowScanner] = useState(false);
@@ -9,6 +10,12 @@ function TicketScanner() {
   const [scanStatus, setScanStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
+
+  let navig = useNavigate(); //
+
+  function redirect() {
+    navig("/patient");
+  }
 
   async function handleScan(ticketId: string) {
     setScannedId(ticketId);
@@ -20,6 +27,8 @@ function TicketScanner() {
       setScanStatus("error");
     }
     setShowScanner(false);
+
+    
   }
   console.log("Scanned ticket ID:", scannedId);
   console.log("Patient data:", patientData);
@@ -41,7 +50,12 @@ function TicketScanner() {
                 <i className="material-symbols-rounded">payments</i>
               </div>
               <div>
-                <i className="material-symbols-rounded">group</i>
+                <i
+                  className="material-symbols-rounded"
+                  onClick={() => redirect()}
+                >
+                  group
+                </i>
               </div>
             </div>
             <div className="side-panel-bottomGroup">
@@ -105,24 +119,24 @@ function TicketScanner() {
 
                 {scanStatus === "success" && (
                   <div className="scan-result-wrapper">
-                  <div className="scan-result success">
-                    <svg className="checkmark" viewBox="0 0 52 52">
-                      <circle
-                        className="checkmark-circle"
-                        cx="26"
-                        cy="26"
-                        r="25"
-                        fill="none"
-                      />
-                      <path
-                        className="checkmark-check"
-                        fill="none"
-                        d="M14 27l7 7 16-16"
-                      />
-                    </svg>
-                    <h3>Ticket Verified!</h3>
-                    <p>Patient successfully validated.</p>
-                  </div>
+                    <div className="scan-result success">
+                      <svg className="checkmark" viewBox="0 0 52 52">
+                        <circle
+                          className="checkmark-circle"
+                          cx="26"
+                          cy="26"
+                          r="25"
+                          fill="none"
+                        />
+                        <path
+                          className="checkmark-check"
+                          fill="none"
+                          d="M14 27l7 7 16-16"
+                        />
+                      </svg>
+                      <h3>Ticket Verified!</h3>
+                      <p>Patient successfully validated.</p>
+                    </div>
                   </div>
                 )}
 

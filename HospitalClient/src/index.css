@@ -5,6 +5,7 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-size: larger;
   min-height: 100vh;
 }
@@ -177,7 +178,7 @@ a {
 }
 
 .sidepanel-container {
-  padding-bottom: 1.45rem;
+  color: white;
 }
 
 .side-panel {
@@ -186,9 +187,9 @@ a {
   width: 130px;
   height: 100%;
   flex-direction: column;
-  border-radius: 1rem;
+  color: white;
+  background-color: black;
   padding: 2rem;
-  border: 1px solid #d1d5db;
 }
 
 .side-panel-topGroup,
@@ -205,9 +206,45 @@ a {
 .side-panel .material-symbols-rounded {
   font-size: xx-large;
   padding: 0.5rem;
-  color: black;
+  color: white;
+}
+.side-panel .material-symbols-rounded:hover {
+  color: green;
+  cursor: pointer;
 }
 
+.patients-main-panel {
+  width: 100%;
+  /* background-color: #a395e0; */
+}
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+.patients-main-panel table {
+  font-size: xx-large;
+  border-collapse: collapse;
+  table-layout: fixed; 
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+th {
+  background: #222;
+  color: white;
+}
+
+
+.patients-main-panel tr:hover{
+  cursor: pointer;
+  background-color: #f1f1f1;
+}
+.whole-panel-patients {
+  padding: 1.5rem;
+}
 .whole-panel {
   display: flex;
   flex: 1;
